@@ -1,0 +1,30 @@
+{
+  "name": "floral-exchange-server",
+  "version": "1.0.0",
+  "description": "server which serves as rest api for floral exchange platform",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "devStart": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mousamdhakal/floral-exchange.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mousamdhakal/floral-exchange/issues"
+  },
+  "homepage": "https://github.com/mousamdhakal/floral-exchange#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.10"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}

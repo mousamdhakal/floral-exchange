@@ -3,6 +3,9 @@ const cors = require('cors')
 const express = require('express')
 const mongoose = require('mongoose')
 
+const {bodyParserHandler, genericErrorHandler, notFoundHandler } = require('./middlewares/errorHandlers');
+const json = require('./middlewares/json');
+
 const apiRoute = require('./routes')
 
 mongoose.connect(process.env.MONGODB_URI, {
@@ -13,38 +16,22 @@ mongoose.connect(process.env.MONGODB_URI, {
 // Start the express app
 const app = express()
 
-// Parse urlencoded bodies (as sent by HTML forms)
-app.use(
-  express.urlencoded({
-    extended: true,
-  })
-)
+// Handle cors error
+app.use(cors())
 
 // Parse json bodies (as sent by API clients)
 app.use(express.json())
 
-// Handle cors error
-app.use(cors())
+// Handle json errors
+app.use(bodyParserHandler);
+app.use(json);
 
 // Set up api for use
 app.use('/api', apiRoute);
 
-// Page not found
-app.use((req, res, next) => {
-  // 404 catch block
-  next({
-    message: 'Not Found',
-    status: 404,
-  })
-})
-
-// Error handling function
-app.use((err, req, res, next) => {
-  res.status(err.status || 400).json({
-    message: err.message || err.sqlMessage || err || 'Server Error',
-    status: err.status || 400,
-  })
-})
+// Error middlewares to handle errors
+app.use(genericErrorHandler);
+app.use(notFoundHandler);
 
 const db = mongoose.connection
 

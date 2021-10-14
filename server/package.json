@@ -4,8 +4,8 @@
   "description": "server which serves as rest api for floral exchange platform",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "devStart": "nodemon app.js"
+    "start": "node src/app.js",
+    "devStart": "nodemon src/app.js"
   },
   "repository": {
     "type": "git",
@@ -18,11 +18,16 @@
   },
   "homepage": "https://github.com/mousamdhakal/floral-exchange#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "http-status-codes": "^2.1.4",
+    "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.10"
+    "lodash": "^4.17.21",
+    "mongoose": "^6.0.10",
+    "node-cache": "^5.1.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.13"

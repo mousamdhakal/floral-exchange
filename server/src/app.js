@@ -3,8 +3,13 @@ const cors = require('cors')
 const express = require('express')
 const mongoose = require('mongoose')
 
-const {bodyParserHandler, genericErrorHandler, notFoundHandler } = require('./middlewares/errorHandlers');
-const json = require('./middlewares/json');
+const {
+  bodyParserHandler,
+  genericErrorHandler,
+  notFoundHandler,
+} = require('./middlewares/errorHandlers')
+
+const json = require('./middlewares/json')
 
 const apiRoute = require('./routes')
 
@@ -23,15 +28,15 @@ app.use(cors())
 app.use(express.json())
 
 // Handle json errors
-app.use(bodyParserHandler);
-app.use(json);
+app.use(bodyParserHandler)
+app.use(json)
 
 // Set up api for use
-app.use('/api', apiRoute);
+app.use('/api', apiRoute)
 
 // Error middlewares to handle errors
-app.use(genericErrorHandler);
-app.use(notFoundHandler);
+app.use(genericErrorHandler)
+app.use(notFoundHandler)
 
 const db = mongoose.connection
 

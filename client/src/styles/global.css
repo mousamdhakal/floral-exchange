@@ -1,0 +1,20 @@
+body {
+  /* Resets */
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  
+  /* variables */
+  --primary-green: #2A9134;
+  --secondary-green: #3FA34D;
+  --tertiary-green: #137547;
+  --light-green: #5BBA6F;
+  --dark-green: #054A29;
+  --black: #000000;
+  --white: #ffffff;
+  --grey-1: #eaeaea;
+  --grey-2: #f6f6f6;
+  --grey-3: #fafafa;
+  --light-grey: #d4d4d4;
+  --dark-grey: #333333;
+}

@@ -1,0 +1,54 @@
+body{
+  background-color: var(--light-grey);
+}
+
+.login-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.login-container {
+  border-radius: 16px;
+  background-color: var(--white);
+  box-shadow: -1px 3px 15px 10px rgba(0, 0, 0, 0.25);
+  min-width: 1064px;
+  min-height: 578px;
+  width: 1064px;
+  height: 578px;
+}
+
+.login-grid {
+  display: flex;
+}
+
+.login-image-container, .login-formarea {
+  flex: 1;
+}
+
+.login-formarea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .login-button-group {
+} */
+
+.login-button.MuiButtonBase-root.MuiToggleButton-root {
+  height: 40px;
+  color: var(--dark-green);
+  background-color: var(--white);
+  text-transform: none ;
+  border-radius: 10px;
+  border: 1px solid #C4C4C4;
+  width: 140px;
+  text-align: center;
+}
+
+.selected-loginButton.MuiButtonBase-root.login-button.MuiToggleButton-root {
+  background-color: var(--primary-green);
+  color: var(--white);
+}

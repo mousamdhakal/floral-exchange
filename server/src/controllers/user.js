@@ -3,6 +3,7 @@ const { sign } = require('jsonwebtoken')
 const Boom = require('@hapi/boom')
 
 const { getUser, createUser } = require('../services/user')
+const { hashPassword, comparePasswords } = require('../utils/hash')
 
 /**
  * Create new user with given information
@@ -13,9 +14,7 @@ const { getUser, createUser } = require('../services/user')
 const register = async (req, res, next) => {
   const user = req.body
 
-  // Hash the password to store in database
-  const salt = genSaltSync(10)
-  user.password = hashSync(user.password, salt)
+  user.password = hashPassword(user.password)
 
   createUser(user)
   .then(user => {
@@ -40,7 +39,7 @@ const login = async (req, res, next) => {
   const result = getUser(user.email)
     .then((result) => {
       // Check if the password entered is correct
-      const passwordResult = compareSync(user.password, result.password)
+      const passwordResult = comparePasswords(user.password, result.password)
       if (passwordResult) {
         result.password = undefined
 
@@ -57,6 +56,7 @@ const login = async (req, res, next) => {
           token: jsonwebtoken,
           data: result,
           status: 200,
+          
         })
       } else {
         throw error('Unauthorized')

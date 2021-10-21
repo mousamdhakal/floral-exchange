@@ -32,10 +32,12 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
-/* .login-button-group {
-} */
+.login-button-group {
+  width: 100%;
+}
 
 .login-button.MuiButtonBase-root.MuiToggleButton-root {
   height: 40px;
@@ -51,4 +53,13 @@ body{
 .selected-loginButton.MuiButtonBase-root.login-button.MuiToggleButton-root {
   background-color: var(--primary-green);
   color: var(--white);
+}
+
+.login-buttons-container {
+  margin-bottom: 90px;
+  width: 50%;
+}
+
+.half-width-container {
+  width: 50%;
 }

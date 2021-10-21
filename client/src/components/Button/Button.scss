@@ -1,0 +1,11 @@
+#root {
+  .contained-full-button {
+    background-color: var(--primary-green);
+    color: var(--white);
+    text-transform: none;
+
+    &:hover {
+      background-color: var(--dark-green);
+    }
+  }
+}

@@ -1,34 +1,59 @@
-import * as userActions from '../actions/userActions';
+import * as userActions from '../actions/userActions'
 
-let token = localStorage.getItem('jwtToken');
+let token = localStorage.getItem('jwtToken')
 
 //Initial state of user
 const INITIAL_STATE = {
   user: null,
   isAuthenticated: token ? true : false,
   loginMessage: null,
-};
+  isCalling: false,
+  error: null
+}
 
 function userReducers(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case userActions.SET_USER:
-      return { ...state, user: action.payload, isAuthenticated: true };
+    case userActions.REGISTER_REQUEST:
+      return { ...state, isCalling: true }
 
-    case userActions.REMOVE_USER:
-      return { ...state, user: null, isAuthenticated: false };
+    case userActions.REGISTER_SUCCESS:
+      return {
+        ...state,
+        isCalling: false,
+        loginMessage: action.payload.message,
+      }
 
-    case userActions.SET_LOG_IN_MESSAGE:
-      return { ...state, loginMessage: action.payload };
+    case userActions.REGISTER_FAILURE:
+      return {
+        ...state,
+        isCalling: false,
+        loginMessage: action.payload.message,
+        error: action.payload
+      }
 
-    case userActions.CLEAR_LOG_IN_MESSAGE:
-      return { ...state, loginMessage: null };
+    case userActions.LOGIN_REQUEST:
+      return { ...state, isCalling: true }
 
-    case userActions.SET_AUTHENTICATED:
-      return { ...state, isAuthenticated: true };
+    case userActions.LOGIN_SUCCESS:
+      return {
+        ...state,
+        user: action.payload.data,
+        isAuthenticated: action.payload.token ? true : false,
+        isCalling: false,
+        loginMessage: action.payload.message,
+      }
+
+      case userActions.LOGIN_FAILURE:
+        return {
+          ...state,
+          isCalling: false,
+          loginMessage: action.payload.message,
+          error: action.payload
+        }
 
     default:
-      return state;
+      return state
   }
 }
 
-export default userReducers;
+export default userReducers

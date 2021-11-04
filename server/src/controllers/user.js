@@ -1,4 +1,3 @@
-const { genSaltSync, hashSync, compareSync } = require('bcrypt')
 const { sign } = require('jsonwebtoken')
 const Boom = require('@hapi/boom')
 

@@ -1,8 +1,10 @@
 const router = require('express').Router()
 
 const userRouter = require('./routes/user')
+const postRouter = require('./routes/post')
 
 router.use('/user', userRouter)
+router.use('/post', postRouter)
 
 /**
  * GET /api

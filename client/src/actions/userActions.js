@@ -1,28 +1,39 @@
-export const SET_USER = 'SET_USER';
-export const REMOVE_USER = 'REMOVE_USER';
-export const SET_LOG_IN_MESSAGE = 'SET_LOG_IN_MESSAGE';
-export const CLEAR_LOG_IN_MESSAGE = 'CLEAR_LOG_IN_MESSAGE';
-export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
+export const REGISTER_REQUEST = 'REGISTER_REQUEST';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_FAILURE = 'REGISTER_FAILURE';
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
-export const setUser = (user) => ({
-  type: SET_USER,
+export const registerRequest = (user) => ({
+  type: REGISTER_REQUEST,
   payload: user,
 });
 
-export const setAuthenticated = () => ({
-  type: SET_AUTHENTICATED,
+export const registerSuccess = (message) => ({
+  type: REGISTER_SUCCESS,
+  payload: message
 });
 
-export const removeUser = () => ({
-  type: REMOVE_USER,
+export const registerFailure = (error) => ({
+  type: REGISTER_FAILURE,
+  payload: error
 });
 
-export const setLogInMessage = (message) => ({
-  type: SET_LOG_IN_MESSAGE,
-  payload: message,
+export const loginRequest = (user) => ({
+  type: LOGIN_REQUEST,
+  payload: user,
 });
 
-export const clearLogInMessage = () => ({
-  type: CLEAR_LOG_IN_MESSAGE,
+export const loginSuccess = (props) => ({
+  type: LOGIN_SUCCESS,
+  payload: props
 });
+
+export const loginFailure = (error) => ({
+  type: LOGIN_FAILURE,
+  payload: error
+});
+
+
 

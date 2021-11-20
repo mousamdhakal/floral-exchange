@@ -16,14 +16,21 @@ const register = async (req, res, next) => {
   user.password = hashPassword(user.password)
 
   createUser(user)
-  .then(user => {
-    res.status(200).json({
-      message: 'User created successfully, login to get access',
-      status: 200,
-    })
-  })
-  .catch((err) => next(err));
+    .then((user) => {
+      user.password = undefined
 
+      // Create new jsonwebtoken for user authorization
+      const jsonwebtoken = sign({ result: user }, process.env.JWTSECRETKEY, {
+        expiresIn: '1w',
+      })
+      return res.json({
+        message: 'User created successfully',
+        token: jsonwebtoken,
+        data: user,
+        status: 200,
+      })
+    })
+    .catch((err) => next(err))
 }
 
 /**

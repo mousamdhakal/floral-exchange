@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import LoginWrapper from '../../components/LoginWrapper'
 import FormInput from '../../components/Input/FormInput'
@@ -35,19 +36,19 @@ export class Login extends Component {
     }
   }
 
-  handleSignUp = () => {
+  handleAuth = () => {
     if(this.state.buttonState === 'signUp') {
       this.props.register(
         { email: this.state.email, 
           password: this.state.password, 
           first_name: this.state.firstName, 
           last_name: this.state.lastName
-        })
+        },this.props.history)
     } else if (this.state.buttonState === 'signIn') {
       this.props.login({
         email: this.state.email,
         password: this.state.password
-      })
+      },this.props.history)
     }
   }
 
@@ -111,9 +112,9 @@ export class Login extends Component {
             <Button
               variant={'contained'}
               containedButton={'contained-full-button half-width mt-48'}
-              handleClick={this.handleSignUp}
+              handleClick={this.handleAuth}
             >
-              Sign Up
+              {buttonState === 'signUp' ? 'Sign Up' : 'Sign In'}
             </Button>
           </div>
         </div>
@@ -128,9 +129,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    register: (props) => dispatch(userActions.registerRequest(props)),
-    login: (props) => dispatch(userActions.loginRequest(props))
+    register: (props, history) => dispatch(userActions.registerRequest(props, history)),
+    login: (props, history) => dispatch(userActions.loginRequest(props, history))
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login))

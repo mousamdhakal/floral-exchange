@@ -1,0 +1,33 @@
+#root {
+  .navButton {
+    border-radius: 4px;
+    color: var(--black);
+    width: 100%;
+    border-color: var(--mid-grey);
+    justify-content: flex-start;
+    margin-bottom: 24px;
+    text-transform: none;
+
+    .navIcon {
+      margin-right: 10px;
+      color: var(--inactive-icon);
+    }
+  }
+
+  .navButton-active {
+    border-radius: 4px;
+    color: var(--white);
+    width: 100%;
+    border-color: var(--primary-green);
+    background-color: var(--primary-green);
+    justify-content: flex-start;
+    margin-bottom: 24px;
+    text-transform: none;
+
+    .navIcon-active {
+      margin-right: 10px;
+      color: var(--white);
+    }
+  }
+  
+}

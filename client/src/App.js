@@ -1,8 +1,14 @@
+import Header from './components/Header/Header';
 
-function App() {
+function App(props) {
   return (
-    <div>
-      <h1>Hello</h1>
+    <div className='fullpage-contianer'>
+      <div className="nav-container">
+        <Header />
+      </div>
+      <div className="main-container">
+        {props.children}
+      </div>
     </div>
   );
 }

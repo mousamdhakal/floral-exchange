@@ -20,6 +20,7 @@ function userReducers(state = INITIAL_STATE, action) {
       return {
         ...state,
         isCalling: false,
+        isAuthenticated: action.payload.token ? true : false,
         loginMessage: action.payload.message,
       }
 
@@ -28,6 +29,7 @@ function userReducers(state = INITIAL_STATE, action) {
         ...state,
         isCalling: false,
         loginMessage: action.payload.message,
+        isAuthenticated: false,
         error: action.payload
       }
 
@@ -35,6 +37,7 @@ function userReducers(state = INITIAL_STATE, action) {
       return { ...state, isCalling: true }
 
     case userActions.LOGIN_SUCCESS:
+      console.log(action.payload)
       return {
         ...state,
         user: action.payload.data,
@@ -47,6 +50,7 @@ function userReducers(state = INITIAL_STATE, action) {
         return {
           ...state,
           isCalling: false,
+          isAuthenticated: false,
           loginMessage: action.payload.message,
           error: action.payload
         }

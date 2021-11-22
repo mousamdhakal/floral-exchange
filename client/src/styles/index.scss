@@ -1,6 +1,10 @@
 body{
-  background-color: var(--light-grey);
+  background-color: var(--grey-1);
 }
+
+// 
+// For authentication pages
+// 
 
 .login-wrapper {
   display: flex;
@@ -45,7 +49,7 @@ body{
   background-color: var(--white);
   text-transform: none ;
   border-radius: 10px;
-  border: 1px solid #C4C4C4;
+  border: 1px solid var(--mid-grey);
   width: 140px;
   text-align: center;
 }
@@ -62,4 +66,34 @@ body{
 
 .half-width-container {
   width: 50%;
+}
+
+// 
+// For navbar and overall layout
+// 
+
+.fullpage-contianer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  padding: 40px 60px;
+}
+
+.nav-container {
+  background-color: var(--white);
+  margin-right: 30px;
+  width: 240px;
+  height: 100%;
+  border-radius: 20px;
+}
+
+.main-container {
+  background-color: var(--white);
+  border-radius: 20px;
+  width: auto;
+  flex: 1;
+  height: 100%;
+  padding: 44px;
 }

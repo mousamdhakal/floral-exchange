@@ -5,9 +5,10 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
-export const registerRequest = (user) => ({
+export const registerRequest = (user, history) => ({
   type: REGISTER_REQUEST,
   payload: user,
+  history: history
 });
 
 export const registerSuccess = (message) => ({
@@ -20,9 +21,10 @@ export const registerFailure = (error) => ({
   payload: error
 });
 
-export const loginRequest = (user) => ({
+export const loginRequest = (user, history) => ({
   type: LOGIN_REQUEST,
   payload: user,
+  history: history
 });
 
 export const loginSuccess = (props) => ({

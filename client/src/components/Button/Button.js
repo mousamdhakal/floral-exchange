@@ -7,6 +7,7 @@ const Button = ({
   rootButton,
   containedButton,
   children,
+  startIcon
 }) => {
   return (
     <BaseButton
@@ -16,6 +17,7 @@ const Button = ({
         root: rootButton,
         contained: containedButton,
       }}
+      startIcon={startIcon ? startIcon : null}
     >
       {children}
     </BaseButton>

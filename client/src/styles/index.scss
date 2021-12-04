@@ -120,6 +120,7 @@ body{
 .center-content-vertical {
   @extend %center-container;
   flex-direction: column;
+  justify-content: center;
 }
 
 .flex-column-half {
@@ -133,4 +134,9 @@ body{
   @extend %center-container;
   background-color: var(--light-grey);
   border-radius: 4px;
+}
+.newItem-actions{
+  display: flex;
+  justify-content: center;
+  margin-top: 256px;
 }

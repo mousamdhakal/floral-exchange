@@ -2,6 +2,11 @@
   .input-root {
     width: 100%
   }
+
+  .inputWithMarginBottom {
+    width: 100%;
+    margin-bottom: 20px;
+  }
   
   .form-input {
     border-radius: 4px;
@@ -11,6 +16,7 @@
     padding: 10px 12px;
     font-size: 14px;
     font-weight: 500;
+    height: 20px;
 
     &:focus {
       border: 1px solid var(--dark-grey)

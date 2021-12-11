@@ -54,12 +54,36 @@
   .mb-48 {
     margin-bottom: 48px;
   }
+  .ml-4 {
+    margin-left: 4px
+  }
+  
+  .ml-8 {
+    margin-left: 8px
+  }
+  
+  .ml-16 {
+    margin-left: 16px
+  }
+  
+  .ml-24 {
+    margin-left: 24px
+  }
+
+  .ml-48 {
+    margin-left: 48px;
+  }
   
   .half-width {
     width: 50%
   }
 
+  .quarter-width {
+    width: 25%
+  }
+
   .two-column-divider {
     display: flex;
   }
+
 }

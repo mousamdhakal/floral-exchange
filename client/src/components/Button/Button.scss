@@ -8,4 +8,14 @@
       background-color: var(--dark-green);
     }
   }
+
+  .contained-outlined-button {
+    background-color: var(--grey-1);
+    color: var(--dark-green);
+    text-emphasis: none;
+
+    &:hover {
+      background-color: var(--mid-grey);
+    }
+  }
 }

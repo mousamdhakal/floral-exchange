@@ -8,6 +8,8 @@ import * as uiActions from '../../actions/uiActions'
 import FlowerPlaceholder from '../../components/FlowerPlaceholder/FlowerPlaceholder'
 import Button from '../../components/Button/Button'
 import FormInput from '../../components/Input/FormInput'
+import Description from '../../components/Description/Description'
+import Tags from '../../components/Tags/Tags'
 import Dropdown from '../../components/Dropdown/Dropdown'
 import { InputLabel } from '@mui/material'
 
@@ -16,6 +18,8 @@ export class NewItems extends Component {
     super(props)
     this.state = {
       title: '',
+      tags: '',
+      description: ''
     }
   }
 
@@ -26,11 +30,15 @@ export class NewItems extends Component {
   handleChange = (e, name) => {
     if (name === 'title') {
       this.setState({ title: e.target.value })
+    } else if (name === 'tags') {
+      this.setState({ tags: e.target.value })
+    } else if (name === 'description') {
+      this.setState({ description: e.target.value })
     }
   }
 
   render() {
-    const { title } = this.state
+    const { title, tags, description } = this.state
     return (
       <>
         <Typography classes={{ h5: 'page-heading' }} variant="h5">
@@ -54,19 +62,42 @@ export class NewItems extends Component {
               name="Title"
               id="post-title"
               value={title}
+              containerClass="inputWithMarginBottom"
               handleChange={(e) => this.handleChange(e, 'title')}
             />
-            <InputLabel classes={{ root: 'form-input-label' }}>
-              Type
-            </InputLabel>
+            <InputLabel classes={{ root: 'form-input-label' }}>Type</InputLabel>
             <Dropdown
               data={[
                 { name: 'Tree', value: 'tree' },
                 { name: 'Flower', value: 'flower' },
                 { name: 'Plant', value: 'plant' },
               ]}
+              containerClass="dropdownWithMarginBottom"
+            />
+            <Tags
+              name="Tags"
+              id="post-tags"
+              value={tags}
+              containerClass="inputWithMarginBottom"
+              handleChange={(e) => this.handleChange(e, 'tags')}
+            />
+            <Description
+              name="Description"
+              id="post-description"
+              value={description}
+              handleChange={(e) => this.handleChange(e, 'description')}
             />
           </div>
+        </div>
+        <div className="newItem-actions">
+          <Button containedButton={'contained-full-button quarter-width m-24'}>
+            Create Post
+          </Button>
+          <Button
+            containedButton={'contained-outlined-button quarter-width m-24'}
+          >
+            Reset
+          </Button>
         </div>
       </>
     )

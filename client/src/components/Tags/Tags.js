@@ -1,8 +1,8 @@
 import { InputLabel, InputBase } from '@mui/material'
 
-import './FormInput.scss'
+import './Tags.scss'
 
-const FormInput = ({
+const Tags = ({
   containerClass,
   name,
   id,
@@ -28,4 +28,4 @@ const FormInput = ({
   )
 }
 
-export default FormInput
+export default Tags

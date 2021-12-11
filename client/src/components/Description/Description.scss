@@ -1,0 +1,22 @@
+#root {
+  .multiline-input {
+    position: relative;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .multiline-outer {
+    width: 100%;
+  }
+
+  .multiline-root {
+    width: 100%;
+    .Mui-focused {
+      border: 1px solid var(--dark-grey);
+      .MuiOutlinedInput-notchedOutline {
+        border: none;
+      }
+    }
+  }
+}

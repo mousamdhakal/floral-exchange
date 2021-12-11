@@ -1,4 +1,4 @@
-import { InputLabel, InputBase, containerClasses } from '@mui/material'
+import { InputLabel, InputBase } from '@mui/material'
 
 import './FormInput.scss'
 

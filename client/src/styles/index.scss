@@ -96,6 +96,7 @@ body{
   flex: 1;
   height: 100%;
   padding: 44px;
+  position: relative;
 }
 
 // Default style for pages
@@ -135,8 +136,11 @@ body{
   background-color: var(--light-grey);
   border-radius: 4px;
 }
+
 .newItem-actions{
+  position: absolute;
+  width: calc(100% - 44px * 2);
+  bottom: 12px;
   display: flex;
   justify-content: center;
-  margin-top: 256px;
 }

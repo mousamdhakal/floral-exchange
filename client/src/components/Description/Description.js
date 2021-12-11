@@ -1,34 +1,40 @@
-import { InputLabel, InputBase, containerClasses } from '@mui/material'
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import './Description.scss';
+import { InputLabel } from '@mui/material'
+import TextField from '@mui/material/TextField'
+import './Description.scss'
 
 const Description = ({
-    containerClass,
-    name,
-    id,
-    placeholder,
-    value,
-    handleChange,
-    type
+  containerClass,
+  name,
+  id,
+  placeholder,
+  value,
+  handleChange,
+  type,
 }) => {
-    return (
-        <>
-            <div className={containerClass ? containerClass : 'input-root'}>
-                <TextField
-                    id={id}
-                    label=""
-                    multiline
-                    maxRows={6}
-                    value={value}
-                    onChange={handleChange}
-                    classes={{ input: 'form-input', root: 'input-root' }}
-                    placeholder={placeholder ? placeholder : ''}
-                    type={type ? type: 'text'}
-                />
-            </div>
-        </>
-    )
+  return (
+    <>
+      <InputLabel classes={{ root: 'form-input-label' }} htmlFor={id}>
+        {name}
+      </InputLabel>
+      <div className={containerClass ? containerClass : 'multiline-outer'}>
+        <TextField
+          id={id}
+          label=""
+          multiline
+          rows={4}
+          maxRows={6}
+          value={value}
+          onChange={handleChange}
+          inputProps={{
+              className: 'multiline-input'
+          }}
+          classes={{root: 'multiline-root'}}
+          placeholder={placeholder ? placeholder : ''}
+          type={type ? type : 'text'}
+        />
+      </div>
+    </>
+  )
 }
 
 export default Description

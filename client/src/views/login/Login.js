@@ -18,7 +18,8 @@ export class Login extends Component {
       email: '',
       password: '',
       firstName: '',
-      lastName: ''
+      lastName: '',
+      userName: ''
     }
   }
 
@@ -33,6 +34,8 @@ export class Login extends Component {
       this.setState({ firstName: e.target.value })
     } else if (name === 'lastName') {
       this.setState({ lastName: e.target.value })
+    } else if (name === 'userName') {
+        this.setState({ userName: e.target.value })
     }
   }
 
@@ -41,8 +44,9 @@ export class Login extends Component {
       this.props.register(
         { email: this.state.email, 
           password: this.state.password, 
-          first_name: this.state.firstName, 
-          last_name: this.state.lastName
+          // first_name: this.state.firstName, 
+          // last_name: this.state.lastName,
+          user_name: this.state.userName
         },this.props.history)
     } else if (this.state.buttonState === 'signIn') {
       this.props.login({
@@ -53,7 +57,7 @@ export class Login extends Component {
   }
 
   render() {
-    const { buttonState, email, password, firstName, lastName } = this.state
+    const { buttonState, email, password, firstName, lastName,userName } = this.state
 
     return (
       <LoginWrapper>
@@ -78,7 +82,7 @@ export class Login extends Component {
             </div>
             {buttonState === 'signUp' && (
               <>
-                <FormInput
+                {/* <FormInput
                   containerClass={'half-width-container'}
                   name="First Name"
                   id="first-name"
@@ -91,6 +95,13 @@ export class Login extends Component {
                   id="last-name"
                   value={lastName}
                   handleChange={(e) => this.handleChange(e, 'lastName')}
+                /> */}
+                <FormInput
+                  containerClass={'half-width-container mt-24 mb-24'}
+                  name="User Name"
+                  id="user-name"
+                  value={userName}
+                  handleChange={(e) => this.handleChange(e, 'userName')}
                 />
               </>
             )}

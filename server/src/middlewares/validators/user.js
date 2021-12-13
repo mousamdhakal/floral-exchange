@@ -3,8 +3,9 @@ const validate = require('../../utils/validate');
 
 // Rules for validating input for creating new user
 const schema = Joi.object({
-    first_name: Joi.string().max(255).required(),
-    last_name: Joi.string().max(255).required(),
+    // first_name: Joi.string().max(255).required(),
+    // last_name: Joi.string().max(255).required(),
+    user_name: Joi.string().max(255).required(),
     email: Joi.string().email().max(255).required(),
     // Password must contain at least 8 characters one letter and one number
     password: Joi

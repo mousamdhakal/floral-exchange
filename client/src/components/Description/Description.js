@@ -22,7 +22,6 @@ const Description = ({
           label=""
           multiline
           rows={4}
-          maxRows={6}
           value={value}
           onChange={handleChange}
           inputProps={{

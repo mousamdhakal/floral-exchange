@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom'
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
 
 import * as uiActions from '../../actions/uiActions'
+import * as postActions from '../../actions/postActions'
 import FlowerPlaceholder from '../../components/FlowerPlaceholder/FlowerPlaceholder'
 import Button from '../../components/Button/Button'
 import FormInput from '../../components/Input/FormInput'
@@ -19,7 +20,8 @@ export class NewItems extends Component {
     this.state = {
       title: '',
       tags: '',
-      description: ''
+      description: '',
+      type: '',
     }
   }
 
@@ -34,7 +36,35 @@ export class NewItems extends Component {
       this.setState({ tags: e.target.value })
     } else if (name === 'description') {
       this.setState({ description: e.target.value })
+    } else if (name === 'dropdown') {
+      this.setState({ type: e.target.value })
     }
+  }
+
+  createPost = () => {
+    const { title, tags, description, type } = this.state
+    const newPost = {}
+    if (title) {
+      newPost.title = title
+    } else {
+      console.log('title is required')
+    }
+
+    if(type) {
+      newPost.type = type
+    } else {
+      console.log('type is required')
+    }
+    
+    if(tags) {
+      newPost.tags = tags
+    }
+
+    if(description) {
+      newPost.description = description
+    }
+
+    this.props.createPost(newPost)
   }
 
   render() {
@@ -73,6 +103,8 @@ export class NewItems extends Component {
                 { name: 'Plant', value: 'plant' },
               ]}
               containerClass="dropdownWithMarginBottom"
+              setDropdownValue={(e) => this.handleChange(e, 'dropdown')}
+              value={'tree'}
             />
             <Tags
               name="Tags"
@@ -90,7 +122,10 @@ export class NewItems extends Component {
           </div>
         </div>
         <div className="newItem-actions">
-          <Button containedButton={'contained-full-button quarter-width m-24'}>
+          <Button
+            containedButton={'contained-full-button quarter-width m-24'}
+            handleClick={this.createPost}
+          >
             Create Post
           </Button>
           <Button
@@ -111,6 +146,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setActive: (page) => dispatch(uiActions.setActive(page)),
+    createPost: (post) => dispatch(postActions.createPost(post)),
   }
 }
 

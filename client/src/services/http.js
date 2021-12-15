@@ -17,3 +17,11 @@ export const register = (user) => {
     },
   });
 };
+
+export const createPost = (post) => {
+  return axios.post(`${BASE_URL}/post/create`, post, {
+    headers: {
+      'content-type': 'application/json',
+    },
+  });
+}

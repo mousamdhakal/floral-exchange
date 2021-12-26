@@ -8,3 +8,34 @@
     border-radius: 4px;
   }
 }
+
+.dashboard-body{
+  display: flex;
+  
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow: scroll;
+  height: 700px;
+  overflow-x: hidden;
+}
+
+.item-container{
+  border : 1px solid grey;
+  border-radius: 4px;
+  margin: 12px;
+  flex: 1 0 21%;
+  
+}
+
+.item-title{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.item-interaction{
+  border-left: 1px solid grey;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+}

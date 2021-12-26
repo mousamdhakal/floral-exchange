@@ -1,9 +1,14 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { register, login } from '../services/http'
+import setAuthorizationToken from '../utils/authorizationHeader';
 
 function* registerUser(action) {
-  try { 
+  try {
     const response = yield call(register, action.payload);
+    if (response.data.token) {
+      localStorage.setItem('jwtToken', response.data.token);
+      setAuthorizationToken(response.data.token);
+    }
     yield put({ type: "REGISTER_SUCCESS", payload: response.data });
     action.history.push('/dashboard');
   } catch (error) {
@@ -14,8 +19,9 @@ function* registerUser(action) {
 function* loginUser(action) {
   try {
     const response = yield call(login, action.payload);
-    if(response.data.token){
+    if (response.data.token) {
       localStorage.setItem('jwtToken', response.data.token);
+      setAuthorizationToken(response.data.token);
     }
     yield put({ type: "LOGIN_SUCCESS", payload: response.data });
     action.history.push('/');

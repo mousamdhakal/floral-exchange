@@ -25,3 +25,11 @@ export const createPost = (post) => {
     },
   });
 }
+
+export const getAllPosts = () => {
+  return axios.get(`${BASE_URL}/post`, {
+    headers: {
+      'content-type': 'application/json',
+    },
+  });
+}

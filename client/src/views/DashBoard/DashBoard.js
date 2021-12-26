@@ -5,6 +5,7 @@ import { useState } from 'react'
 
 import './DashBoard.scss'
 import * as uiActions from '../../actions/uiActions'
+import * as postActions from '../../actions/postActions'
 
 import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
@@ -20,31 +21,10 @@ export class DashBoard extends Component {
 
   componentDidMount() {
     this.props.setActive('dashboard')
+    this.props.getPosts()
   }
 
   render() {
-    const items = [
-      { title: 'abc', type: 'def', tags: 'ghi', id: 1 },
-      { title: '123', type: '456', tags: '789', id: 2 },
-      { title: 'kakha', type: 'gagha', tags: 'nacha', id: 3 },
-      { title: 'ekdui', type: 'tinchar', tags: 'pachxa', id: 4 },
-      { title: 'ekdui', type: 'tinchar', tags: 'pachxa', id: 5 },
-      { title: 'ekdui', type: 'tinchar', tags: 'pachxa', id: 6 },
-      { title: 'ekdui', type: 'tinchar', tags: 'pachxa', id: 7 },
-      { title: 'ekdui', type: 'tinchar', tags: 'pachxa', id: 8 },
-      { title: 'ekdui', type: 'tinchar', tags: 'pachxa', id: 9 },
-      { title: 'ekdui', type: 'tinchar', tags: 'pachxa', id: 10 },
-      { title: 'ekdui', type: 'tinchar', tags: 'pachxa', id: 11 },
-      { title: 'ekdui', type: 'tinchar', tags: 'pachxa', id: 12 },
-      { title: 'ekdui', type: 'tinchar', tags: 'pachxa', id: 13 },
-      { title: 'ekdui', type: 'tinchar', tags: 'pachxa', id: 14 },
-      { title: 'ekdui', type: 'tinchar', tags: 'pachxa', id: 15 },
-      { title: 'ekdui', type: 'tinchar', tags: 'pachxa', id: 16 },
-      { title: 'ekdui', type: 'tinchar', tags: 'pachxa', id: 17 },
-      { title: 'ekdui', type: 'tinchar', tags: 'pachxa', id: 18 },
-      { title: 'ekdui', type: 'tinchar', tags: 'pachxa', id: 19 },
-      { title: 'ekdui', type: 'tinchar', tags: 'pachxa', id: 20 }
-    ];
     return (
       <div className='dashboard-container'>
         <div className="Searchbox">
@@ -65,7 +45,7 @@ export class DashBoard extends Component {
           />
         </div>
         <div className="dashboard-body">
-          {items.map((item) => (
+          {this.props.posts.map((item) => (
             <>
               <div className="item-container">
                 <div className="item-picture">
@@ -76,7 +56,7 @@ export class DashBoard extends Component {
                   />
                 </div>
                 <div className="item-title">
-                  <div> { item.title } </div>
+                  <div> {item.title} </div>
                   <div className="item-interaction"> <FavoriteBorderIcon /> <MessageIcon /> </div>
                 </div>
               </div>
@@ -89,12 +69,13 @@ export class DashBoard extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.user.user }
+  return { user: state.user.user, posts: state.post.posts }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setActive: (page) => dispatch(uiActions.setActive(page)),
+    getPosts: () => dispatch(postActions.getPosts()),
   }
 }
 

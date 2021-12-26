@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   error: null,
   post: null,
   isCalling: false,
+  posts: [],
 }
 
 function postReducers(state = INITIAL_STATE, action) {
@@ -31,7 +32,28 @@ function postReducers(state = INITIAL_STATE, action) {
         isCalling: false,
         post: null,
       }
+    case postActions.GET_POSTS_REQUEST:
+      return {
+        ...state,
+        error: null,
+        isCalling: true,
+      }
 
+    case postActions.GET_POSTS_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        isCalling: false,
+        posts: action.payload.posts,
+      }
+
+    case postActions.GET_POSTS_FAILURE:
+      return {
+        ...state,
+        error: action.payload.error,
+        isCalling: false,
+        posts: [],
+      }
     default:
       return state
   }

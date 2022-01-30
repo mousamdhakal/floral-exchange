@@ -35,29 +35,30 @@ export class Login extends Component {
     } else if (name === 'lastName') {
       this.setState({ lastName: e.target.value })
     } else if (name === 'userName') {
-        this.setState({ userName: e.target.value })
+      this.setState({ userName: e.target.value })
     }
   }
 
   handleAuth = () => {
-    if(this.state.buttonState === 'signUp') {
+    if (this.state.buttonState === 'signUp') {
       this.props.register(
-        { email: this.state.email, 
-          password: this.state.password, 
+        {
+          email: this.state.email,
+          password: this.state.password,
           // first_name: this.state.firstName, 
           // last_name: this.state.lastName,
           user_name: this.state.userName
-        },this.props.history)
+        }, this.props.history)
     } else if (this.state.buttonState === 'signIn') {
       this.props.login({
         email: this.state.email,
         password: this.state.password
-      },this.props.history)
+      }, this.props.history)
     }
   }
 
   render() {
-    const { buttonState, email, password, firstName, lastName,userName } = this.state
+    const { buttonState, email, password, firstName, lastName, userName } = this.state
 
     return (
       <LoginWrapper>

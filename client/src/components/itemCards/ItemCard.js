@@ -7,7 +7,7 @@ const ItemCard = (props) => {
     return (
         <div className="item-box">
             <div className="item-pic">
-                <FlowerPlaceholder />
+                <FlowerPlaceholder containerHeight='125px' containerWidth='auto' borderRadius='0px'/>
             </div>
             <div className="item-rest">
                 <div className="item-desc">

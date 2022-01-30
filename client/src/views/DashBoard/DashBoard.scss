@@ -1,6 +1,7 @@
 #root {
   .dashboard-container {
     margin-top: 36px;
+    height: calc(100% - 36px);
   }
 
   .searchBar {
@@ -14,7 +15,8 @@
   flex-direction: row;
   flex-wrap: wrap;
   overflow: scroll;
-  height: 700px;
+  height: calc(100% - 20px);
   overflow-x: hidden;
   margin-top: 10px;
+  
 }

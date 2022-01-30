@@ -7,11 +7,14 @@ import './DashBoard.scss'
 import * as uiActions from '../../actions/uiActions'
 import * as postActions from '../../actions/postActions'
 
+import ItemCard from '../../components/itemCards/ItemCard'
 import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 import SearchOutlined from '@mui/icons-material/SearchOutlined'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import MessageIcon from '@mui/icons-material/Message';
+import FlowerPlaceholder from '../../components/FlowerPlaceholder/FlowerPlaceholder'
+
 
 export class DashBoard extends Component {
   constructor(props) {
@@ -46,21 +49,7 @@ export class DashBoard extends Component {
         </div>
         <div className="dashboard-body">
           {this.props.posts.map((item) => (
-            <>
-              <div className="item-container">
-                <div className="item-picture">
-                  <img
-                    className="login-image"
-                    src="./assets/images/login-flower.png"
-                    alt="People browing flowers"
-                  />
-                </div>
-                <div className="item-title">
-                  <div> {item.title} </div>
-                  <div className="item-interaction"> <FavoriteBorderIcon /> <MessageIcon /> </div>
-                </div>
-              </div>
-            </>
+            <ItemCard title={item.title} />
           ))}
         </div>
       </div>

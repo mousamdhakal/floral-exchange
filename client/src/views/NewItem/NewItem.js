@@ -29,6 +29,13 @@ export class NewItems extends Component {
     this.props.setActive('newItem')
   }
 
+  initialState = {
+    title: '',
+    tags: '',
+    description: '',
+    type: '',
+  }
+
   handleChange = (e, name) => {
     if (name === 'title') {
       this.setState({ title: e.target.value })
@@ -50,21 +57,30 @@ export class NewItems extends Component {
       console.log('title is required')
     }
 
-    if(type) {
+    if (type) {
       newPost.type = type
     } else {
       console.log('type is required')
     }
-    
-    if(tags) {
+
+    if (tags) {
       newPost.tags = tags
     }
 
-    if(description) {
+    if (description) {
       newPost.description = description
     }
 
-    this.props.createPost(newPost)
+    this.props.createPost(newPost);
+
+    alert('post created');
+
+    window.location.reload();
+
+
+  }
+  resetPost = () => {
+    this.setState(() => this.initialState);
   }
 
   render() {
@@ -104,7 +120,7 @@ export class NewItems extends Component {
               ]}
               containerClass="dropdownWithMarginBottom"
               setDropdownValue={(e) => this.handleChange(e, 'dropdown')}
-              value={'tree'}
+              value={this.state.value}
             />
             <Tags
               name="Tags"
@@ -130,6 +146,7 @@ export class NewItems extends Component {
           </Button>
           <Button
             containedButton={'contained-outlined-button quarter-width m-24'}
+            handleClick={this.resetPost}
           >
             Reset
           </Button>

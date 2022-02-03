@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
+import { Link } from 'react-router-dom'
+
 
 import * as uiActions from '../../actions/uiActions'
 import * as postActions from '../../actions/postActions'
@@ -51,6 +53,15 @@ export class NewItems extends Component {
   createPost = () => {
     const { title, tags, description, type } = this.state
     const newPost = {}
+    const months = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    const d = new Date();
+    const day = d.getDate();
+    const year = d.getFullYear();
+    const date = `${months[d.getMonth()]} ${day}, ${year}`
+    date.toString();
+
+    newPost.date = date
+
     if (title) {
       newPost.title = title
     } else {
@@ -73,11 +84,7 @@ export class NewItems extends Component {
 
     this.props.createPost(newPost);
 
-    alert('post created');
-
-    window.location.reload();
-
-
+    window.location.href = '/profile';
   }
   resetPost = () => {
     this.setState(() => this.initialState);

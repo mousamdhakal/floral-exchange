@@ -11,6 +11,67 @@
   border-radius: 4px;
   width: 30%;
   height: 40%;
+
+  .top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid;
+    border-color: var(--dark-green);
+    cursor: default;
+    font-weight: bold;
+    font-size: 24px;
+    color: var(--dark-green);
+  }
+  
+  .cross {
+    cursor: pointer;
+    color: var(--dark-green);
+  }
+
+  .rest {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .mid {
+    display: flex;
+    flex-direction: row;
+    padding: 4px;
+    justify-content: space-between;
+    height: 100%;
+    font-size: 20px;
+  }
+
+  .time {
+    font-size: 16px;
+  }
+
+  .mid-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 8px;
+    flex-wrap: wrap;
+  }
+
+  .bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light-green);
+    color: var(--dark-grey);
+    padding: 3px;
+    font-size: 18px;
+  }
+
+  .bottom-text {
+    margin-left: 4px;
+  }
 }
 
 .overlay {
@@ -22,59 +83,4 @@
   background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(4px);
   z-index: 10000;
-}
-
-.top {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid;
-  border-color: var(--dark-green);
-  cursor: default;
-  font-weight: bold;
-  font-size: 24px;
-  color: var(--dark-green);
-}
-.cross {
-  cursor: pointer;
-  color: var(--dark-green);
-}
-.rest {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.mid {
-  display: flex;
-  flex-direction: row;
-  padding: 4px;
-  justify-content: space-between;
-  height: 100%;
-  font-size: 20px;
-}
-.time {
-  font-size: 16px;
-}
-.mid-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-right: 8px;
-  flex-wrap: wrap;
-}
-
-.bottom {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--light-green);
-  color: var(--dark-grey);
-  padding: 3px;
-  font-size: 18px;
-}
-.bottom-text {
-  margin-left: 4px;
 }

@@ -2,13 +2,13 @@ import { useDispatch } from 'react-redux'
 import './NearbyItems.scss'
 
 import { useState, useCallback, useRef } from 'react'
+import { useSelector } from 'react-redux';
 
 import Map, { Marker, Popup } from 'react-map-gl'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 
-import * as itemData from './testData.json'
-
 import * as uiActions from '../../actions/uiActions'
+import * as postActions from '../../actions/postActions'
 
 const NearbyItems = () => {
   const mapRef = useRef();
@@ -22,6 +22,15 @@ const NearbyItems = () => {
     zoom: 10,
   })
 
+  let posts = useSelector((state) => state.post.posts);
+  
+  if(!posts || posts.length === 0) {
+    dispatch(postActions.getPosts())
+  }
+
+  let filteredPosts = posts.filter((post) => {
+    return post.location && post.location.latitude && post.location.longitude
+  })
   const handleMarkerClick = useCallback((e,item) => {
     e.preventDefault()
     setSelectedItem(item)
@@ -42,9 +51,9 @@ const NearbyItems = () => {
       mapStyle="mapbox://styles/mousamdhakal/ckzzb8bcy000e14pe4tfvuwci"
       
     >
-      {itemData.items.map((item) => (
+      {filteredPosts && filteredPosts.length > 0 && filteredPosts.map((item) => (
         <Marker
-          key={item.id}
+          key={item._id}
           latitude={item.location.latitude}
           longitude={item.location.longitude}
         >
@@ -66,7 +75,8 @@ const NearbyItems = () => {
           onClose={() => setSelectedItem(null)}
         >
           <div>
-            <h3>{selectedItem.name}</h3>
+            <h3>{selectedItem.title}</h3>
+            <p>{selectedItem.description}</p>
           </div>
         </Popup>
       ) : null}

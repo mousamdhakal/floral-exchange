@@ -14,7 +14,6 @@ function* createNewPost(action) {
 
 function* getPosts(action) {
   try {
-    console.log(action)
     const response = yield call(getAllPosts, action.payload);
     yield put({ type: 'GET_POSTS_SUCCESS', payload: response.data });
   } catch (error) {

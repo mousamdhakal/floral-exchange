@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { useState } from 'react'
 
 import './DashBoard.scss'
 import * as uiActions from '../../actions/uiActions'
@@ -11,9 +10,6 @@ import ItemCard from '../../components/itemCards/ItemCard'
 import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 import SearchOutlined from '@mui/icons-material/SearchOutlined'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import MessageIcon from '@mui/icons-material/Message';
-import FlowerPlaceholder from '../../components/FlowerPlaceholder/FlowerPlaceholder'
 
 
 export class DashBoard extends Component {
@@ -50,7 +46,7 @@ export class DashBoard extends Component {
 
         <div className="dashboard-body">
           {this.props.posts.map((item) => (
-            <ItemCard title={item.title} description={item.description} date={item.date} />
+            <ItemCard key={item._id} title={item.title} description={item.description} date={item.date} />
           ))}
         </div>
       </div>

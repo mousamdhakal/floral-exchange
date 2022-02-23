@@ -10,6 +10,7 @@ import NewItem from './views/NewItem/NewItem';
 import Chats from './views/Chats/Chats';
 import Activity from './views/Activity/Activity';
 import Profile from './views/Profile/Profile';
+import NearbyItems from './views/NearbyItems/NearbyItems';
 
 const Routes = () => (
   <BrowserRouter>
@@ -21,6 +22,7 @@ const Routes = () => (
         <Route path="/chats" component={withAuthenticated(Chats)}></Route>
         <Route path="/activity" component={withAuthenticated(Activity)}></Route>
         <Route path="/profile" component={withAuthenticated(Profile)}></Route>
+        <Route path="/nearbyItems" component={withAuthenticated(NearbyItems)}></Route>
         <Route path="/" component={withAuthenticated(DashBoard)}></Route>
         </Switch>
       </App>

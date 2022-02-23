@@ -3,8 +3,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
-import { Link } from 'react-router-dom'
-
 
 import * as uiActions from '../../actions/uiActions'
 import * as postActions from '../../actions/postActions'
@@ -50,7 +48,33 @@ export class NewItems extends Component {
     }
   }
 
-  createPost = () => {
+  savePost = () => {
+    const component = this
+    let location = null
+    console.log(navigator.geolocation)
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError,{timeout: 10000, enableHighAccuracy: true});
+    }
+
+    function showPosition(position) {
+      location = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      };
+      component.createPost(location)
+    }
+
+    function showError(error) {
+      if(error.PERMISSION_DENIED){
+          console.log("The User has denied the request for Geolocation.");
+      }
+      component.createPost()
+    }
+    
+
+  }
+
+  createPost = (location) => {
     const { title, tags, description, type } = this.state
     const newPost = {}
     const months = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -82,16 +106,23 @@ export class NewItems extends Component {
       newPost.description = description
     }
 
+    console.log(location)
+    if(location) {
+      newPost.location = location
+    }
+
+    console.log(newPost)
+
     this.props.createPost(newPost);
 
-    window.location.href = '/profile';
+    // window.location.href = '/profile';
   }
   resetPost = () => {
     this.setState(() => this.initialState);
   }
 
   render() {
-    const { title, tags, description } = this.state
+    const { title, tags, description, type } = this.state
     return (
       <>
         <Typography classes={{ h5: 'page-heading' }} variant="h5">
@@ -127,7 +158,7 @@ export class NewItems extends Component {
               ]}
               containerClass="dropdownWithMarginBottom"
               setDropdownValue={(e) => this.handleChange(e, 'dropdown')}
-              value={this.state.value}
+              value={type}
             />
             <Tags
               name="Tags"
@@ -147,7 +178,7 @@ export class NewItems extends Component {
         <div className="newItem-actions">
           <Button
             containedButton={'contained-full-button quarter-width m-24'}
-            handleClick={this.createPost}
+            handleClick={this.savePost}
           >
             Create Post
           </Button>

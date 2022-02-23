@@ -47,9 +47,10 @@ export class DashBoard extends Component {
             }}
           />
         </div>
+
         <div className="dashboard-body">
           {this.props.posts.map((item) => (
-            <ItemCard title={item.title} />
+            <ItemCard title={item.title} description={item.description} date={item.date} />
           ))}
         </div>
       </div>

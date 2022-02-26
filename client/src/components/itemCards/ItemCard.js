@@ -1,44 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
-import './itemCards.scss';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import MessageIcon from '@mui/icons-material/Message';
+import './itemCards.scss'
+import Modal from '../../components/Modal/Modal'
 import FlowerPlaceholder from '../../components/FlowerPlaceholder/FlowerPlaceholder'
-import Details from '../../views/Detail/Details'
+import MessageIcon from '@mui/icons-material/Message';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
+
+import ItemDetails from '../ItemDetails/ItemDetails'
 
 const ItemCard = (props) => {
-    const [isOpen, setIsOpen] = useState(false);
-    return (
-        <div className="item-box">
-            <div className="item-pic" onClick={() => setIsOpen(true)}>
-                <FlowerPlaceholder containerHeight='125px' containerWidth='auto' borderRadius='0px' />
-            </div>
-            <Details
-                open={isOpen}
-                onClose={() => setIsOpen(false)}
-                props={props}
-            />
+  const [isOpen, setIsOpen] = useState(false)
 
-            <div className="item-rest">
-                <div className="item-desc">
-                    <div>
-                        <p className="item-title">{props.title}</p>
-                    </div>
-                    <div className="item-time">
-                        Posted on {props.date}
-                    </div>
-                </div>
-                <div className="item-action">
-                    <div className="item-like">
-                        <FavoriteBorderIcon />
-                    </div>
-                    <div className="item-comment">
-                        <MessageIcon />
-                    </div>
-                </div>
-            </div>
+  return (
+    <div className="item-box">
+      <div className="item-pic" onClick={() => setIsOpen(true)}>
+        <FlowerPlaceholder
+          containerHeight="125px"
+          containerWidth="auto"
+          borderRadius="0px"
+        />
+      </div>
+      <Modal open={isOpen} handleClose={() => setIsOpen(false)} props={props}>
+        <ItemDetails props={props} onClose={() => setIsOpen(false)}/>
+      </Modal>
+      <div className="item-rest">
+        <div className="item-desc">
+          <div>
+            <p className="item-title">{props.title}</p>
+          </div>
+          <div className="item-time">Posted on {props.date}</div>
         </div>
-    )
+        <div className="item-action">
+          <div className="item-like">
+            <FavoriteBorderIcon />
+          </div>
+          <div className="item-comment">
+            <MessageIcon />
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
 
-export default ItemCard;
+export default ItemCard

@@ -1,0 +1,60 @@
+body {
+
+  .post-content {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .post-date {
+    font-size: 12px;
+    line-height: 16px;
+    color: rgba(0, 0, 0, 0.5);
+    margin-top: 8px;
+  }
+
+  .post-text {
+    flex: 1;
+    margin-right: 50px;
+  }
+
+  .post-image {
+    flex: 1;
+  }
+
+  .post-title {
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 33px;
+  }
+
+  .post-desc {
+    font-size: 14px;
+    line-height: 19px;
+    margin-top: 30px;
+  }
+
+  .post-buttons {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+
+    button {
+      flex: 1;
+      width: 90%;
+    }
+
+    .contact-button {
+      margin-right: 30px;
+    }
+  }
+
+  .card {
+    padding: 29px 19px 19px 19px;
+  }
+
+  .contact-owner-icon {
+    margin-left: 10px;
+  }
+}

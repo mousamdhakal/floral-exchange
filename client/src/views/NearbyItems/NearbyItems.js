@@ -9,6 +9,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn'
 
 import * as uiActions from '../../actions/uiActions'
 import * as postActions from '../../actions/postActions'
+import ItemDetails from '../../components/ItemDetails/ItemDetails';
 
 const NearbyItems = () => {
   const mapRef = useRef();
@@ -35,7 +36,8 @@ const NearbyItems = () => {
     e.preventDefault()
     setSelectedItem(item)
     setViewState(vState => {return {...vState, latitude: item.location.latitude, longitude: item.location.longitude}})
-    mapRef.current?.flyTo({center: [item.location.longitude, item.location.latitude], duration: 500});
+    const zoomLevel = mapRef.current.getZoom()
+    mapRef.current?.flyTo({center: [item.location.longitude + zoomLevel/120 , item.location.latitude ], duration: 500, zoom: 10});
   }, []) 
 
   const [selectedItem, setSelectedItem] = useState(null)
@@ -69,15 +71,12 @@ const NearbyItems = () => {
         <Popup
           latitude={selectedItem.location.latitude}
           longitude={selectedItem.location.longitude}
-          closeButton={true}
+          closeButton={false}
           closeOnClick={false}
           anchor='left'
           onClose={() => setSelectedItem(null)}
         >
-          <div>
-            <h3>{selectedItem.title}</h3>
-            <p>{selectedItem.description}</p>
-          </div>
+          <ItemDetails onClose={() => setSelectedItem(null)} props={selectedItem} />
         </Popup>
       ) : null}
     </Map>

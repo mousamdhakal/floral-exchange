@@ -9,6 +9,7 @@ const schema = Joi.object({
   age: Joi.number(),
   title: Joi.string().max(500).required(),
   date: Joi.string().max(500).required(),
+  location: Joi.object({ latitude: Joi.number().required(), longitude: Joi.number().required() }),
 })
 
 /**

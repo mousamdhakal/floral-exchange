@@ -1,10 +1,12 @@
 import * as userActions from '../actions/userActions'
 
 let token = localStorage.getItem('jwtToken')
+let userJson = localStorage.getItem('user')
+let user = userJson ? JSON.parse(userJson) : null
 
 //Initial state of user
 const INITIAL_STATE = {
-  user: null,
+  user: user,
   isAuthenticated: token ? true : false,
   loginMessage: null,
   isCalling: false,
@@ -46,14 +48,14 @@ function userReducers(state = INITIAL_STATE, action) {
         loginMessage: action.payload.message,
       }
 
-      case userActions.LOGIN_FAILURE:
-        return {
-          ...state,
-          isCalling: false,
-          isAuthenticated: false,
-          loginMessage: action.payload.message,
-          error: action.payload
-        }
+    case userActions.LOGIN_FAILURE:
+      return {
+        ...state,
+        isCalling: false,
+        isAuthenticated: false,
+        loginMessage: action.payload.message,
+        error: action.payload
+      }
 
     default:
       return state

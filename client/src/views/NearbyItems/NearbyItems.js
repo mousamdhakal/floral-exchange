@@ -23,20 +23,20 @@ const NearbyItems = () => {
   })
 
   let posts = useSelector((state) => state.post.posts);
-  
-  if(!posts || posts.length === 0) {
+
+  if (!posts || posts.length === 0) {
     dispatch(postActions.getPosts())
   }
 
   let filteredPosts = posts.filter((post) => {
     return post.location && post.location.latitude && post.location.longitude
   })
-  const handleMarkerClick = useCallback((e,item) => {
+  const handleMarkerClick = useCallback((e, item) => {
     e.preventDefault()
     setSelectedItem(item)
-    setViewState(vState => {return {...vState, latitude: item.location.latitude, longitude: item.location.longitude}})
-    mapRef.current?.flyTo({center: [item.location.longitude, item.location.latitude], duration: 500});
-  }, []) 
+    setViewState(vState => { return { ...vState, latitude: item.location.latitude, longitude: item.location.longitude } })
+    mapRef.current?.flyTo({ center: [item.location.longitude, item.location.latitude], duration: 500 });
+  }, [])
 
   const [selectedItem, setSelectedItem] = useState(null)
   return (
@@ -49,7 +49,7 @@ const NearbyItems = () => {
       mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       // mapStyle="mapbox://styles/mousamdhakal/ckzzb5akj011v14rw83in6usy"
       mapStyle="mapbox://styles/mousamdhakal/ckzzb8bcy000e14pe4tfvuwci"
-      
+
     >
       {filteredPosts && filteredPosts.length > 0 && filteredPosts.map((item) => (
         <Marker

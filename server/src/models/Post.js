@@ -11,7 +11,7 @@ const postSchema = mongoose.Schema({
   title: String,
   userId: String,
   date: String,
-  location: Object,
+  location: Object
 });
 
 const Post = mongoose.model('Post', postSchema);

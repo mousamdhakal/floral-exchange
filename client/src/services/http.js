@@ -33,3 +33,11 @@ export const getAllPosts = () => {
     },
   });
 }
+
+export const getPostsForUserAPI = (id) => {
+  return axios.get(`${BASE_URL}/post/${id}`, {
+    headers: {
+      'content-type': 'application/json',
+    },
+  });
+}

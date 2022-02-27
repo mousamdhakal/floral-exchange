@@ -1,0 +1,17 @@
+.icon-container {
+  background-color: var(--reddish-grey);
+  //   background-image: linear-gradient(
+  //     to right,
+  //     var(--light-green),
+  //     var(--orange)
+  //   );
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: var(--dark-grey);
+  font-size: 2.5rem;
+  border: 2px solid var(--dark-grey);
+}

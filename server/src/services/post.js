@@ -9,7 +9,7 @@ const Post = require('../models/Post');
  * @param   {String}  id
  * @returns {Promise}
  */
- function getPost(id) {
+function getPost(id) {
   return Post.findOne({ _id }).exec()
 }
 
@@ -19,9 +19,22 @@ const Post = require('../models/Post');
  * @param   
  * @returns {Promise}
  */
- function getAllPosts() {
+function getAllPosts() {
   return Post.find().exec()
 }
+
+/**
+ * Get all posts.
+ *
+ * @param   
+ * @returns {Promise}
+ */
+function getUserPosts(id) {
+  let userPost = Post.find({ userId: id }).exec()
+  console.log(id, userPost)
+  return userPost
+}
+
 
 
 /**
@@ -30,15 +43,16 @@ const Post = require('../models/Post');
  * @param   {Object}  post
  * @returns {Promise}
  */
- function createNewPost(post) {
+function createNewPost(post) {
   const newPost = new Post(post)
 
   return newPost.save()
-  .then((post) => post);
+    .then((post) => post);
 }
 
 module.exports = {
   getPost,
   getAllPosts,
-  createNewPost
+  createNewPost,
+  getUserPosts,
 }

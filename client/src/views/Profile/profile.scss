@@ -1,16 +1,11 @@
 #root {
-  .dashboard-container {
+  .profile-container {
     margin-top: 36px;
     height: calc(100% - 36px);
   }
-
-  .searchBar {
-    height: 40px;
-    border-radius: 4px;
-  }
 }
 
-.dashboard-body {
+.profile-item {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

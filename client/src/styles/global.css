@@ -1,20 +1,22 @@
 body {
-  
   /* variables */
-  --primary-green: #2A9134;
-  --secondary-green: #3FA34D;
+  --primary-green: #2a9134;
+  --secondary-green: #3fa34d;
   --tertiary-green: #137547;
-  --light-green: #5BBA6F;
-  --dark-green: #054A29;
+  --light-green: #5bba6f;
+  --dark-green: #054a29;
   --black: #000000;
   --white: #ffffff;
   --grey-1: #eaeaea;
   --grey-2: #f6f6f6;
   --grey-3: #fafafa;
   --light-grey: #d4d4d4;
-  --mid-grey: #C4C4C4;
+  --reddish-grey: #b49797;
+  --mid-grey: #c4c4c4;
   --dark-grey: #333333;
-  --inactive-icon: #686B6F;
+  --inactive-icon: #686b6f;
+  --red: #b22222;
+  --orange: #ffbf00;
 }
 
 /* CSS resets */
@@ -82,4 +84,9 @@ select {
 
 a {
   text-decoration: none;
+}
+
+P {
+  font-family: 'Open Sans', 'Nunito', 'Roboto', '"Helvetica Neue"', 'Arial',
+    'sans-serif';
 }

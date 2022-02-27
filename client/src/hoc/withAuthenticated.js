@@ -10,7 +10,6 @@ export default function withAuthenticated(ComposedComponent) {
     }
 
     checkAuthenticated = () => {
-      console.log(this.props.authenticated)
       if (!this.props.isAuthenticated) {
         const { history } = this.props;
         history.push(`/login`, null);

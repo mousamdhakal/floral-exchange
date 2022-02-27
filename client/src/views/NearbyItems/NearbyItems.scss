@@ -1,0 +1,11 @@
+.marker-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+body {
+  .mapboxgl-popup {
+    max-width: 40vw !important;
+  }
+}

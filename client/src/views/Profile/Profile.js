@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import ProfileIcon from '../../components/ProfileIcon/ProfileIcon'
 import EditIcon from '@mui/icons-material/Edit';
-import ToggleButtons from '../../components/ToggleButtons/ToggleButtons'
 
 
 import './profile.scss'
@@ -49,14 +48,7 @@ export class Profile extends Component {
           </div>
         </div>
         <div className="profile-post">
-          <ToggleButtons
-            initialState={'Your Posts'}
-            states={[
-              { name: 'Your Posts', value: 'selfPost' },
-              { name: 'Liked Posts', value: 'likedPost' },
-            ]}
-            handleChange={(e) => this.handleChange(e, 'auth')}
-          />
+
         </div>
         <div className="profile-item">
           {this.props.posts && this.props.posts.map((item) => (

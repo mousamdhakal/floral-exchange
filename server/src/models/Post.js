@@ -9,7 +9,7 @@ const postSchema = mongoose.Schema({
   image: String,
   age: Number,
   title: String,
-  userId: String,
+  user_id: mongoose.SchemaTypes.ObjectId,
   date: String,
   location: Object
 });

@@ -48,7 +48,7 @@ const getPostsForUser = async (req, res, next) => {
  */
 const createPost = async (req, res, next) => {
   const post = req.body
-  post.userId = req.user._id
+  post.user_id = req.user._id
 
   createNewPost(post)
     .then(post => {

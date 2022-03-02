@@ -41,3 +41,27 @@ export const getPostsForUserAPI = (id) => {
     },
   });
 }
+
+export const getAllUsers = () => {
+  return axios.get(`${BASE_URL}/user`, {
+    headers: {
+      'content-type': 'application/json',
+    },
+  });
+}
+
+export const getAllChats = () => {
+  return axios.get(`${BASE_URL}/chat`, {
+    headers: {
+      'content-type': 'application/json',
+    },
+  });
+}
+
+export const getChatWithUser = (id) => {
+  return axios.get(`${BASE_URL}/chat/${id}`, {
+    headers: {
+      'content-type': 'application/json',
+    },
+  });
+}

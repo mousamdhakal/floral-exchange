@@ -1,0 +1,145 @@
+.chats-container {
+  display: flex;
+  height: 100%;
+}
+
+.chats-list {
+  flex: 30%;
+  min-width: 300px;
+  border: 1px solid var(--grey-1)
+}
+
+.chat-details {
+  flex: 70%;
+  min-width: 300px;
+}
+
+.chat-list-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid var(--grey-1);
+  cursor: pointer;
+}
+
+.chat-list-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.chat-list-item-header-left {
+  display: flex;
+  align-items: center;
+}
+
+.chat-list-item-header-left-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.chat-list-item-header-left-info {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.chat-list-item-header-left-info-name {
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 5px;
+  // color: var(--grey-1);
+}
+
+.chat-list-item-header-left-info-last-message {
+  font-size: 12px;
+  color: var(--muted)
+  // color: var(--grey-2);
+}
+
+.chat-list-item-header-right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-list-item-header-right-time {
+  font-size: 12px;
+  color: var(--muted)
+  // color: var(--grey-2);
+}
+
+.chat-details {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--grey-1);
+}
+
+.chat-details-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-details-user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid var(--grey-1);
+}
+
+.chat-details-messages {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.generic-message {
+  border: 1px solid var(--light-grey);
+  border-radius: 14px;
+  padding: 4px 12px;
+  max-width: 80%;
+  margin: 0 10px;
+}
+
+.user-sent-message {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 5px;
+  
+  .generic-message {
+    background-color: var(--purple);
+    color: var(--light-grey)
+  }
+}
+
+.user-received-message {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 5px;
+
+  .generic-message {
+    background-color: var(--grey-3);
+  }
+}
+
+.messageField {
+  border-radius: 0px;
+  font-size: 20px;
+
+  fieldSet {
+    border: none;
+    border-top: 1px solid var(--grey-1);
+  }
+
+  &:hover, &:focus {
+    fieldset {
+      border-top: 1px solid var(--mid-grey) !important;
+    }
+  }
+}

@@ -5,6 +5,50 @@
   }
 }
 
+.profile-title {
+  // background-image: linear-gradient(to right, var(--light-green), var(--white));
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  // background-color: aqua;
+  margin-bottom: 20px;
+}
+
+.userDetail-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // align-items: center;
+  // background-color: gold;
+  height: inherit;
+  margin-left: 20px;
+}
+
+.profile-userName {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--dark-grey);
+}
+
+.profile-post {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  // background-color: var(--grey-1);
+  // background-image: linear-gradient(to bottom, var(--grey-1), var(--white));
+  color: var(--dark-green);
+  padding: 12px;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.yourPost-text {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
 .profile-item {
   display: flex;
   flex-direction: row;
@@ -13,4 +57,18 @@
   height: calc(100% - 20px);
   overflow-x: hidden;
   margin-top: 10px;
+}
+
+.edit-profile {
+  display: flex;
+  flex-direction: row;
+  color: var(--inactive-icon);
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.edit-profileText {
+  margin-right: 5px;
 }

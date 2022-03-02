@@ -2,9 +2,11 @@ const router = require('express').Router()
 
 const userRouter = require('./routes/user')
 const postRouter = require('./routes/post')
+const chatRouter = require('./routes/chat')
 
 router.use('/user', userRouter)
 router.use('/post', postRouter)
+router.use('/chat', chatRouter)
 
 /**
  * GET /api

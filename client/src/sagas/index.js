@@ -1,11 +1,9 @@
 import { all } from 'redux-saga/effects'
-import postSagas from './postSagas';
+import postSagas from './postSagas'
 
-import userSagas from "./userSagas";
+import userSagas from './userSagas'
+import chatSagas from './chatSagas'
 
 export default function* rootSaga() {
-  yield all([
-    userSagas(),
-    postSagas()
-  ])
+  yield all([userSagas(), postSagas(), chatSagas()])
 }

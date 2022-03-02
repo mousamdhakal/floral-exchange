@@ -17,6 +17,8 @@ body {
   --inactive-icon: #686b6f;
   --red: #b22222;
   --orange: #ffbf00;
+  --muted: #8e8e8e;
+  --purple: #4d426d;
 }
 
 /* CSS resets */

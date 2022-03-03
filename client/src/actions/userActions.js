@@ -10,6 +10,8 @@ export const GET_USERS_REQUEST = 'GET_USERS_REQUEST';
 export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
 export const GET_USERS_FAILURE = 'GET_USERS_FAILURE';
 
+export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
+
 export const registerRequest = (user, history) => ({
   type: REGISTER_REQUEST,
   payload: user,
@@ -55,6 +57,11 @@ export const getUsersSuccess = (users) => ({
 export const getUsersFailure = (error) => ({
   type: GET_USERS_FAILURE,
   payload: error
+});
+
+export const setAuthenticated = (isAuthenticated) => ({
+  type: SET_AUTHENTICATED,
+  payload: isAuthenticated
 });
 
 

@@ -2,6 +2,7 @@ import { call, put, takeLatest } from 'redux-saga/effects'
 import { register, login, getAllUsers } from '../services/http'
 import setAuthorizationToken from '../utils/authorizationHeader';
 import * as userActions from '../actions/userActions';
+import { toast } from 'react-toastify';
 
 function* registerUser(action) {
   try {
@@ -12,9 +13,11 @@ function* registerUser(action) {
       setAuthorizationToken(response.data.token);
     }
     yield put({ type: userActions.REGISTER_SUCCESS, payload: response.data });
+    toast.success('Registration Successful')
     action.history.push('/dashboard');
   } catch (error) {
     yield put({ type: userActions.REGISTER_FAILURE, payload: error });
+    toast.error(error && error.message ? error.message : 'Registration Failed')
   }
 }
 
@@ -24,6 +27,7 @@ function* getUsers(action) {
     yield put({ type: userActions.GET_USERS_SUCCESS, payload: response.data });
   } catch (error) {
     yield put({ type: userActions.GET_USERS_FAILURE, payload: error });
+    toast.error(error && error.message ? error.message : 'Failed to get users')
   }
 }
 
@@ -36,9 +40,11 @@ function* loginUser(action) {
       setAuthorizationToken(response.data.token);
     }
     yield put({ type: userActions.LOGIN_SUCCESS, payload: response.data });
+    toast.success('Login Successful')
     action.history.push('/');
   } catch (error) {
     yield put({ type: userActions.LOGIN_FAILURE, payload: error });
+    toast.error(error && error.message ? error.message : 'Login Failed')
   }
 }
 

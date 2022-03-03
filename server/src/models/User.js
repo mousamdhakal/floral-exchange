@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
-  firstName: String,
-  lastName: String,
-  userName: String,
+  first_name: String,
+  last_name: String,
+  user_name: String,
   email: {
     type: String,
     unique: true

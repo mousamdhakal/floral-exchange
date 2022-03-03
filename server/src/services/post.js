@@ -30,8 +30,7 @@ function getAllPosts() {
  * @returns {Promise}
  */
 function getUserPosts(id) {
-  let userPost = Post.find({ userId: id }).exec()
-  console.log(id, userPost)
+  let userPost = Post.find({ user_id: id }).exec()
   return userPost
 }
 

@@ -17,6 +17,7 @@ const {
 const json = require('./middlewares/json')
 
 const apiRoute = require('./routes')
+const { chatValidator } = require('./middlewares/validators/chat')
 
 // Connect with mongodb database
 mongoose.connect(process.env.MONGODB_URI, {
@@ -38,24 +39,48 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // Create http server
-const server = http.createServer(app);
+const server = http.createServer(app)
 
 // Initialize socket.io
-const io = new Server(server,{
+const io = new Server(server, {
   cors: {
     origin: 'http://localhost:3000',
     methods: ['GET', 'POST'],
   },
 })
 
-// Sequencenumber to store sockets for connected clients
 sequenceNumberByClient = new Map()
 
+// Listen for chat messages from socket.io
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  console.log('a user connected', socket.handshake.auth.userId)
 
-  socket.on('disconnect', () => console.log('user disconnected'));
-});
+  sequenceNumberByClient.set(socket.handshake.auth.userId, socket)
+
+  socket.on('disconnect', () => console.log('user disconnected'))
+
+  socket.on('message', (data, callBack) => {
+    chatValidator(
+      {
+        sender_id: data.sender.id,
+        receiver_id: data.receiver.id,
+        message: data.message,
+      },
+      () =>
+        handleMessageReceived(
+          socket,
+          io,
+          {
+            sender: data.sender,
+            receiver: data.receiver,
+            message: data.message,
+          },
+          callBack
+        ),
+      callBack
+    )
+  })
+})
 
 // Parse json bodies (as sent by API clients)
 app.use(express.json())

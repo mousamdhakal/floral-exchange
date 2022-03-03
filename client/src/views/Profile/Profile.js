@@ -9,7 +9,6 @@ import * as postActions from '../../actions/postActions'
 
 import ItemCard from '../../components/itemCards/ItemCard'
 
-
 export class Profile extends Component {
   constructor(props) {
     super(props)
@@ -18,14 +17,16 @@ export class Profile extends Component {
 
   componentDidMount() {
     this.props.setActive('profile')
-    this.props.getUserPosts(this.props.user._id)
+    if (this.props.user) {
+      this.props.getUserPosts(this.props.user._id)
+    }
   }
 
   render() {
     return (
-      <div className='profile-container'>
+      <div className="profile-container">
         <div className="profile-title">
-          <ProfileIcon firstName='alan' lastName='paul' />
+          <ProfileIcon firstName="alan" lastName="paul" />
         </div>
         <div className="profile-item">
           {this.props.posts &&
@@ -55,7 +56,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(Profile))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Profile))

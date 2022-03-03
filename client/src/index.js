@@ -37,7 +37,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <ToastContainer position="bottom-right" pauseOnFocusLoss draggable />
+        <ToastContainer theme='dark' position="bottom-right" pauseOnFocusLoss draggable />
         <App />
       </ThemeProvider>
     </Provider>

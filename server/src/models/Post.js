@@ -6,11 +6,12 @@ const postSchema = mongoose.Schema({
     enum: ['plant', 'flower', 'tree']
   },
   description: String,
-  image: String,
+  fileName: String,
   age: Number,
   title: String,
-  userId: String,
-  date: String,
+  image: String,
+  user_id: mongoose.SchemaTypes.ObjectId,
+  date: Date,
   location: Object
 });
 

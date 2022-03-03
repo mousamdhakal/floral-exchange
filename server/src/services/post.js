@@ -43,8 +43,13 @@ function getUserPosts(id) {
  * @param   {Object}  post
  * @returns {Promise}
  */
-function createNewPost(post) {
-  const newPost = new Post(post)
+function createNewPost(post, imageName) {
+  const modifiedPost = JSON.parse(JSON.stringify(post))
+  if(imageName) {
+    modifiedPost.image  = imageName
+  }
+  
+  const newPost = new Post(modifiedPost)
 
   return newPost.save()
     .then((post) => post);

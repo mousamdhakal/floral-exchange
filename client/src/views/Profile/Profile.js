@@ -28,9 +28,16 @@ export class Profile extends Component {
           <ProfileIcon firstName='alan' lastName='paul' />
         </div>
         <div className="profile-item">
-          {this.props.posts && this.props.posts.map((item) => (
-            <ItemCard key={item._id} title={item.title} description={item.description} date={item.date} />
-          ))}
+          {this.props.posts &&
+            this.props.posts.map((item) => (
+              <ItemCard
+                image={item.image}
+                key={item._id}
+                title={item.title}
+                description={item.description}
+                date={item.date}
+              />
+            ))}
         </div>
       </div>
     )

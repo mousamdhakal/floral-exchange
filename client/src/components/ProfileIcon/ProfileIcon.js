@@ -6,10 +6,10 @@ const ProfileIcon = (props) => {
     return (
         <div className='icon-container'>
             {
-                props.user && props.user.profilePic ?
+                props && props.icon ?
                     <img src={props.user.profilePic} alt='profile-pic' /> :
                     <div className='named-icon'>
-                        <p> {props.user && props.user.firstName[0]} {props.user && props.user.lastName[0]} </p>
+                        <p> {props.firstName && props.firstName[0].toUpperCase()} {props.lastName && props.lastName[0].toUpperCase()} </p>
                     </div>
             }
         </div>

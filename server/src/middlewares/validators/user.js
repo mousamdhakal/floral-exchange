@@ -15,7 +15,9 @@ const schema = Joi.object({
       'Password must contain at least 8 characters including one letter and one number'
     )
     .max(255)
-    .required()
+    .required(),
+  location: Joi.object({ latitude: Joi.number().required(), longitude: Joi.number().required() }),
+  interest: Joi.string().valid('plant', 'flower', 'tree'),
 })
 
 /**

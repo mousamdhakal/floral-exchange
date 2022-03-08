@@ -3,58 +3,208 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import ProfileIcon from '../../components/ProfileIcon/ProfileIcon'
 import EditIcon from '@mui/icons-material/Edit';
+import CloseIcon from '@mui/icons-material/Close';
+import { ToggleButtonGroup } from '@mui/material';
+import { ToggleButton } from '@mui/material';
+import Modal from '../../components/Modal/Modal';
+import Dropdown from '../../components/Dropdown/Dropdown'
+import FormInput from '../../components/Input/FormInput'
 
 
 import './profile.scss'
 import * as uiActions from '../../actions/uiActions'
 import * as postActions from '../../actions/postActions'
+import * as userActions from '../../actions/userActions'
 
 import ItemCard from '../../components/itemCards/ItemCard'
-
-const user = {
-  userName: 'MrWorldWide',
-  firstName: 'Kawadi',
-  lastName: 'Manxe',
-}
+import ToggleButtons from '../../components/ToggleButtons/ToggleButtons';
 
 export class Profile extends Component {
+
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      buttonState: 'posts',
+      isOpen: false,
+      interest: 'flower',
+      userName: this.props.user.user_name,
+      firstName: this.props.user.first_name,
+      lastName: this.props.user.last_name,
+      email: this.props.user.email,
+      location: 'kathmandu',
+    }
+  }
+  handleChange = (e, name) => {
+    if (name === 'dropdown') {
+      this.setState({ interest: e.target.value })
+    } else if (name === 'firstName') {
+      this.setState({ firstName: e.target.value })
+    } else if (name === 'lastName') {
+      this.setState({ lastName: e.target.value })
+    } else if (name === 'location') {
+      this.setState({ location: e.target.value })
+    }
+  }
+
+  initialState = {
+    interest: 'flower',
+    userName: this.props.user.user_name,
+    firstName: this.props.user.first_name,
+    lastName: this.props.user.last_name,
+    email: this.props.user.email,
+    location: 'kathmandu',
+  }
+  handleReset = () => {
+    this.setState(() => this.initialState);
+  }
+
+  handleCancel = () => {
+    this.setState({ isOpen: false })
+    this.setState(() => this.initialState);
+  }
+
+  handleSave = () => {
+
   }
 
   componentDidMount() {
     this.props.setActive('profile')
     this.props.getUserPosts(this.props.user._id)
+    this.props.getUser(this.props.user._id)
   }
 
-
   render() {
+    const { interest, email, userName, firstName, lastName, location } = this.state
+
     return (
       <div className='profile-container'>
         <div className="profile-title">
           <div className="profile-icon">
-            <ProfileIcon user={user} />
+            <ProfileIcon firstName={firstName} lastName={lastName} icon={null} />
           </div>
           <div className="userDetail-container">
-            <p className="profile-userName">{user.userName}</p>
+            <p className="profile-userName">{userName}</p>
             <div>
-              <p>{user.firstName} {user.lastName}</p>
+              <p>{firstName} {lastName}</p>
             </div>
-            <div className="edit-profile" onClick={() => { }}>
+            <div className="edit-profile" onClick={() => this.setState({ isOpen: true })}>
               <p className="edit-profileText"> Edit Profile </p>
               <EditIcon fontSize='small' />
             </div>
           </div>
         </div>
-        <div className="profile-post">
+        <Modal open={this.state.isOpen} handleClose={() => { this.setState({ isOpen: false }) }}>
+          <div className="edit-profile-container">
+            <div className="edit-profile-row">
+              <div className="edit-profile-title">Edit your Profile</div>
+              <div className="edit-profile-close" onClick={() => { this.setState({ isOpen: false }) }}>
+                <CloseIcon fontSize='small' />
+              </div>
+            </div>
+            <div className="edit-profile-row">
+              <div className="edit-profile-label">User Name</div>
+              <div className="uneditable-profile-input">
+                {userName}
+              </div>
+            </div>
+            <div className="edit-profile-row">
+              <div className="edit-profile-label">Email</div>
+              <div className="uneditable-profile-input">
+                {email}
+              </div>
+            </div>
+            <div className="edit-profile-row">
+              <div className="edit-profile-label">First Name: </div>
+              <div className="edit-profile-input">
+                <FormInput
+                  name="firstName"
+                  type="text"
+                  value={firstName}
+                  handleChange={(e) => this.handleChange(e, 'firstName')}
+                  label={false}
+                />
+              </div>
+            </div>
+            <div className="edit-profile-row">
+              <div className="edit-profile-label">Last Name: </div>
+              <div className="edit-profile-input">
+                <FormInput
+                  name="lastName"
+                  type="text"
+                  value={lastName}
+                  handleChange={(e) => this.handleChange(e, 'lastName')}
+                  label={false}
+                />
+              </div>
+            </div>
+            <div className="edit-profile-row">
+              <div className="edit-profile-label">Location: </div>
+              <div className="edit-profile-input">
+                <FormInput
+                  name="location"
+                  type="text"
+                  value={location}
+                  handleChange={(e) => this.handleChange(e, 'location')}
+                  label={false}
+                />
+              </div>
+            </div>
+            <div className="edit-profile-row">
+              <div className="edit-profile-label">Interest: </div>
+              <div className="edit-profile-input">
+                <Dropdown
+                  data={[
+                    { name: 'Tree', value: 'tree' },
+                    { name: 'Flower', value: 'flower' },
+                    { name: 'Plant', value: 'plant' },
+                  ]}
+                  containerClass="dropdownWithMarginBottom"
+                  setDropdownValue={(e) => this.handleChange(e, 'dropdown')}
+                  value={interest}
+                />
+              </div>
+            </div>
+            <div className="edit-profile-action">
+              <div className="edit-profile-button-reset" onClick={this.handleReset}>Reset</div>
+              <div className="edit-profile-button-cancel" onClick={this.handleCancel}>Cancel</div>
+              <div className="edit-profile-button-save" onClick={this.handleSave}>Save</div>
+            </div>
+          </div>
+        </Modal>
+        <div className="toggleButtonContainer">
+          <ToggleButtonGroup
+            classes={{ root: 'post-button-group' }}
+            value={this.state.buttonState}
+            exclusive
+            onChange={(e) => { this.setState({ buttonState: e.target.value }) }}
+          >
+            <ToggleButton
+              value='posts'
+              classes={{
+                root: 'post-button',
+                selected: 'selected-postButton'
+              }}>
+              Posts
+            </ToggleButton>
+            <ToggleButton
+              value='liked'
+              classes={{
+                root: 'post-button',
+                selected: 'selected-postButton'
+              }}>
+              Liked Posts
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </div>
 
-        </div>
-        <div className="profile-item">
-          {this.props.posts && this.props.posts.map((item) => (
-            <ItemCard key={item._id} title={item.title} description={item.description} date={item.date} self={true} />
-          ))}
-        </div>
+        {
+          (this.state.buttonState === 'posts') ?
+            <div className="profile-item">
+              {this.props.posts && this.props.posts.map((item) => (
+                <ItemCard key={item._id} type={item.type} title={item.title} description={item.description} date={item.date} self={true} deleteThis={() => console.log('deleted')} />
+              ))}
+            </div> : <div> These are the liked post </div>
+        }
       </div>
     )
   }
@@ -68,6 +218,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setActive: (page) => dispatch(uiActions.setActive(page)),
     getUserPosts: (id) => dispatch(postActions.getUserPosts(id)),
+    getUser: (id) => dispatch(userActions.getUser(id))
+    // deletePost: (id) => dispatch(postActions.deletePost(id)),
   }
 }
 

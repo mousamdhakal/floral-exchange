@@ -10,6 +10,10 @@ export const GET_USERS_REQUEST = 'GET_USERS_REQUEST';
 export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
 export const GET_USERS_FAILURE = 'GET_USERS_FAILURE';
 
+export const GET_USER_REQUEST = 'GET_USER_REQUEST';
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
+export const GET_USER_FAILURE = 'GET_USER_FAILURE';
+
 export const registerRequest = (user, history) => ({
   type: REGISTER_REQUEST,
   payload: user,
@@ -54,6 +58,21 @@ export const getUsersSuccess = (users) => ({
 
 export const getUsersFailure = (error) => ({
   type: GET_USERS_FAILURE,
+  payload: error
+});
+
+export const getUser = (id) => ({
+  type: GET_USER_REQUEST,
+  payload: id,
+})
+
+export const getUserSuccess = (posts) => ({
+  type: GET_USER_SUCCESS,
+  payload: posts
+});
+
+export const getUserFailure = (error) => ({
+  type: GET_USER_FAILURE,
   payload: error
 });
 

@@ -53,7 +53,7 @@ export class NewItems extends Component {
     let location = null
     console.log(navigator.geolocation)
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition, showError,{timeout: 10000, enableHighAccuracy: true});
+      navigator.geolocation.getCurrentPosition(showPosition, showError, { timeout: 10000, enableHighAccuracy: true });
     }
 
     function showPosition(position) {
@@ -65,12 +65,12 @@ export class NewItems extends Component {
     }
 
     function showError(error) {
-      if(error.PERMISSION_DENIED){
-          console.log("The User has denied the request for Geolocation.");
+      if (error.PERMISSION_DENIED) {
+        console.log("The User has denied the request for Geolocation.");
       }
       component.createPost()
     }
-    
+
 
   }
 
@@ -107,7 +107,7 @@ export class NewItems extends Component {
     }
 
     console.log(location)
-    if(location) {
+    if (location) {
       newPost.location = location
     }
 
@@ -142,6 +142,7 @@ export class NewItems extends Component {
             </div>
           </div>
           <div className="half-width flex-column-half">
+            <InputLabel classes={{ root: 'form-input-label' }}>Title</InputLabel>
             <FormInput
               name="Title"
               id="post-title"

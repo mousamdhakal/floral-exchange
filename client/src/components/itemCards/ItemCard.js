@@ -43,7 +43,7 @@ const ItemCard = (props) => {
               </div>
             </div> :
 
-              <div className="item-delete">
+              <div className="item-delete" onClick={() => props.deleteThis()}>
                 <DeleteIcon
                   style={{
                     color: '#b22222',

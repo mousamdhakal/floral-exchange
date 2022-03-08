@@ -55,11 +55,22 @@ function createUser(user) {
     });
 }
 
+/**
+ * 
+ * @param {String} id Id of user to update
+ * @param {Object} user parameters to update
+ * @returns Updated user Info
+ */
+function updateUserWithId(id, user) {
+  return User.findOneAndUpdate({ _id: id }, user, { new: true }).exec()
+}
+
 
 
 module.exports = {
   getUser,
   createUser,
   getAllUsers,
-  getUserFromId
+  getUserFromId,
+  updateUserWithId
 }

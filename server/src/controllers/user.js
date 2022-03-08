@@ -1,7 +1,7 @@
 const { sign } = require('jsonwebtoken')
 const Boom = require('@hapi/boom')
 
-const { getUser, createUser, getAllUsers } = require('../services/user')
+const { getUser, createUser, getAllUsers, updateUserWithId } = require('../services/user')
 const { hashPassword, comparePasswords } = require('../utils/hash')
 
 /**
@@ -92,4 +92,25 @@ const login = async (req, res, next) => {
 
 }
 
-module.exports = { register, login, getAllUsers: getUsers }
+
+/**
+ * Update User
+ * @param {Object} req Request object
+ * @param {Object} res Response object
+ * @param {Function} next Function as a reference to call next middleware
+ */
+ const updateUser = async (req, res, next) => {
+
+  const userId = req.user._id
+  updateUserWithId(userId, req.body)
+    .then(user => {
+      res.status(200).json({
+        user: user,
+        status: 200,
+      })
+    })
+    .catch((err) => next(err));
+
+}
+
+module.exports = { register, login, getAllUsers: getUsers, updateUser }

@@ -22,6 +22,8 @@ export class NewItems extends Component {
       tags: '',
       description: '',
       type: '',
+      uploadedImage: {},
+      uploadedImageUrl: '',
     }
   }
 
@@ -48,77 +50,93 @@ export class NewItems extends Component {
     }
   }
 
+  handleImageAdd = (e) => {
+    if (e.target.files[0]) {
+      const image = e.target.files[0]
+      this.setState({
+        uploadedImage: image,
+        uploadedImageUrl: URL.createObjectURL(image),
+      })
+    } else {
+      this.setState({
+        uploadedImage: {},
+        uploadedImageUrl: '',
+      })
+    }
+  }
+
   savePost = () => {
     const component = this
     let location = null
     console.log(navigator.geolocation)
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition, showError,{timeout: 10000, enableHighAccuracy: true});
+      navigator.geolocation.getCurrentPosition(showPosition, showError, {
+        timeout: 10000,
+        enableHighAccuracy: true,
+      })
     }
 
     function showPosition(position) {
       location = {
         latitude: position.coords.latitude,
-        longitude: position.coords.longitude
-      };
+        longitude: position.coords.longitude,
+      }
       component.createPost(location)
     }
 
     function showError(error) {
-      if(error.PERMISSION_DENIED){
-          console.log("The User has denied the request for Geolocation.");
+      if (error.PERMISSION_DENIED) {
+        console.log('The User has denied the request for Geolocation.')
       }
       component.createPost()
     }
-    
-
   }
 
   createPost = (location) => {
     const { title, tags, description, type } = this.state
     const newPost = {}
-    const months = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    const d = new Date();
-    const day = d.getDate();
-    const year = d.getFullYear();
-    const date = `${months[d.getMonth()]} ${day}, ${year}`
-    date.toString();
 
-    newPost.date = date
+    const formData = new FormData()
+    formData.append('date', new Date())
+
 
     if (title) {
-      newPost.title = title
+      formData.append('title', title)
     } else {
       console.log('title is required')
     }
 
     if (type) {
-      newPost.type = type
+      formData.append('type', type)
     } else {
       console.log('type is required')
     }
 
     if (tags) {
-      newPost.tags = tags
+      formData.append('tags', tags)
     }
 
     if (description) {
+      formData.append('description', description)
       newPost.description = description
     }
 
-    console.log(location)
-    if(location) {
+    if (location) {
+      formData.append('location', JSON.stringify(location))
       newPost.location = location
     }
 
-    console.log(newPost)
+    if(this.state.uploadedImage) {
+      formData.append('image', this.state.uploadedImage)
+    }
 
-    this.props.createPost(newPost);
+    this.props.createPost(formData)
 
     // window.location.href = '/profile';
   }
+
   resetPost = () => {
-    this.setState(() => this.initialState);
+    this.setState(() => this.initialState)
   }
 
   render() {
@@ -131,11 +149,28 @@ export class NewItems extends Component {
         <div className={'two-column-divider'}>
           <div className="half-width flex-column-half">
             <div className={'center-content-vertical'}>
-              <FlowerPlaceholder />
+              {!this.state.uploadedImageUrl.trim() ? (
+                <FlowerPlaceholder />
+              ) : (
+                <img
+                  src={this.state.uploadedImageUrl}
+                  alt="Selected"
+                  className="selected-image"
+                />
+              )}
+              <input
+                type="file"
+                name="image"
+                id="file-upload"
+                style={{ display: 'none' }}
+                onChange={this.handleImageAdd}
+                accept="image/png, image/gif, image/jpeg"
+              />
               <Button
                 variant={'contained'}
                 containedButton={'contained-full-button half-width mt-24'}
                 startIcon={<AddRoundedIcon />}
+                handleClick={() => document.getElementById('file-upload').click()}
               >
                 Add Image
               </Button>

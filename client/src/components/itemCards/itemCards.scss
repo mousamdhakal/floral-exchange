@@ -11,7 +11,8 @@
   margin-bottom: 30px;
 }
 .item-pic {
-  width: 100%;
+  height: calc(100% - 70px);
+  text-align: center;
   filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.4));
   cursor: pointer;
 }
@@ -19,6 +20,7 @@
   display: flex;
   flex-direction: row;
   padding: 10px 15px;
+  border-top: 1px solid rgba(0,0,0,0.1)
 }
 .item-desc {
   width: 80%;

@@ -32,6 +32,7 @@ export class Profile extends Component {
           {this.props.posts &&
             this.props.posts.map((item) => (
               <ItemCard
+                image={item.image}
                 key={item._id}
                 title={item.title}
                 description={item.description}

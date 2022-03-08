@@ -40,7 +40,6 @@ function userReducers(state = INITIAL_STATE, action) {
       return { ...state, isCalling: true }
 
     case userActions.LOGIN_SUCCESS:
-      console.log(action.payload)
       return {
         ...state,
         user: action.payload.data,
@@ -80,6 +79,28 @@ function userReducers(state = INITIAL_STATE, action) {
           isCalling: false,
           users: [],
         }
+
+        case userActions.UPDATE_USER_REQUEST:
+          return {
+            ...state,
+            error: null,
+            isCalling: true,
+          }
+    
+        case userActions.UPDATE_USER_SUCCESS:
+          return {
+            ...state,
+            error: null,
+            isCalling: false,
+            user: action.payload.user,
+          }
+    
+        case userActions.UPDATE_USER_FAILURE:
+          return {
+            ...state,
+            error: action.payload.error,
+            isCalling: false,
+          }
 
     default:
       return state

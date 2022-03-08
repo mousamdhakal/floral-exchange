@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import ProfileIcon from '../../components/ProfileIcon/ProfileIcon'
-import EditIcon from '@mui/icons-material/Edit';
-import CloseIcon from '@mui/icons-material/Close';
-import { ToggleButtonGroup } from '@mui/material';
-import { ToggleButton } from '@mui/material';
-import Modal from '../../components/Modal/Modal';
+import EditIcon from '@mui/icons-material/Edit'
+import CloseIcon from '@mui/icons-material/Close'
+import { ToggleButtonGroup } from '@mui/material'
+import { ToggleButton } from '@mui/material'
+import Modal from '../../components/Modal/Modal'
 import Dropdown from '../../components/Dropdown/Dropdown'
 import FormInput from '../../components/Input/FormInput'
-
 
 import './profile.scss'
 import * as uiActions from '../../actions/uiActions'
@@ -17,10 +16,9 @@ import * as postActions from '../../actions/postActions'
 import * as userActions from '../../actions/userActions'
 
 import ItemCard from '../../components/itemCards/ItemCard'
-import ToggleButtons from '../../components/ToggleButtons/ToggleButtons';
+import ToggleButtons from '../../components/ToggleButtons/ToggleButtons'
 
 export class Profile extends Component {
-
   constructor(props) {
     super(props)
     this.state = {
@@ -32,18 +30,12 @@ export class Profile extends Component {
       lastName: this.props.user.last_name,
       email: this.props.user.email,
       location: 'kathmandu',
+      updatedItems: {},
     }
   }
+
   handleChange = (e, name) => {
-    if (name === 'dropdown') {
-      this.setState({ interest: e.target.value })
-    } else if (name === 'firstName') {
-      this.setState({ firstName: e.target.value })
-    } else if (name === 'lastName') {
-      this.setState({ lastName: e.target.value })
-    } else if (name === 'location') {
-      this.setState({ location: e.target.value })
-    }
+    this.setState({ updatedItems:{ ...this.state.updatedItems, [e.target.name] : e.target.value} })
   }
 
   initialState = {
@@ -55,16 +47,16 @@ export class Profile extends Component {
     location: 'kathmandu',
   }
   handleReset = () => {
-    this.setState(() => this.initialState);
+    this.setState(() => this.initialState)
   }
 
   handleCancel = () => {
     this.setState({ isOpen: false })
-    this.setState(() => this.initialState);
+    this.setState(() => this.initialState)
   }
 
   handleSave = () => {
-
+    this.props.updateUser(this.state.updatedItems)
   }
 
   componentDidMount() {
@@ -74,52 +66,69 @@ export class Profile extends Component {
   }
 
   render() {
-    const { interest, email, userName, firstName, lastName, location } = this.state
+    const { interest, email, userName, firstName, lastName, location, updatedItems } =
+      this.state
 
     return (
-      <div className='profile-container'>
+      <div className="profile-container">
         <div className="profile-title">
           <div className="profile-icon">
-            <ProfileIcon firstName={firstName} lastName={lastName} icon={null} />
+            <ProfileIcon
+              firstName={firstName}
+              lastName={lastName}
+              icon={null}
+            />
           </div>
           <div className="userDetail-container">
             <p className="profile-userName">{userName}</p>
             <div>
-              <p>{firstName} {lastName}</p>
+              <p>
+                {firstName} {lastName}
+              </p>
             </div>
-            <div className="edit-profile" onClick={() => this.setState({ isOpen: true })}>
+            <div
+              className="edit-profile"
+              onClick={() => this.setState({ isOpen: true })}
+            >
               <p className="edit-profileText"> Edit Profile </p>
-              <EditIcon fontSize='small' />
+              <EditIcon fontSize="small" />
             </div>
           </div>
         </div>
-        <Modal open={this.state.isOpen} handleClose={() => { this.setState({ isOpen: false }) }}>
+        <Modal
+          open={this.state.isOpen}
+          handleClose={() => {
+            this.setState({ isOpen: false })
+          }}
+        >
           <div className="edit-profile-container">
             <div className="edit-profile-row">
               <div className="edit-profile-title">Edit your Profile</div>
-              <div className="edit-profile-close" onClick={() => { this.setState({ isOpen: false }) }}>
-                <CloseIcon fontSize='small' />
+              <div
+                className="edit-profile-close"
+                onClick={() => {
+                  this.setState({ isOpen: false })
+                }}
+              >
+                <CloseIcon fontSize="small" />
               </div>
             </div>
             <div className="edit-profile-row">
               <div className="edit-profile-label">User Name</div>
-              <div className="uneditable-profile-input">
-                {userName}
-              </div>
+              <div className="uneditable-profile-input">{userName}</div>
             </div>
             <div className="edit-profile-row">
               <div className="edit-profile-label">Email</div>
-              <div className="uneditable-profile-input">
-                {email}
-              </div>
+              <div className="uneditable-profile-input">{email}</div>
             </div>
             <div className="edit-profile-row">
               <div className="edit-profile-label">First Name: </div>
               <div className="edit-profile-input">
                 <FormInput
                   name="firstName"
+                  inputName="first_name"
                   type="text"
-                  value={firstName}
+                  value={updatedItems.first_name ? updatedItems.first_name : firstName}
                   handleChange={(e) => this.handleChange(e, 'firstName')}
                   label={false}
                 />
@@ -130,8 +139,9 @@ export class Profile extends Component {
               <div className="edit-profile-input">
                 <FormInput
                   name="lastName"
+                  inputName="last_name"
                   type="text"
-                  value={lastName}
+                  value={updatedItems.last_name ? updatedItems.last_name : lastName}
                   handleChange={(e) => this.handleChange(e, 'lastName')}
                   label={false}
                 />
@@ -141,9 +151,10 @@ export class Profile extends Component {
               <div className="edit-profile-label">Location: </div>
               <div className="edit-profile-input">
                 <FormInput
+                inputName = "location"
                   name="location"
                   type="text"
-                  value={location}
+                  value={updatedItems.location ? updatedItems.location : location}
                   handleChange={(e) => this.handleChange(e, 'location')}
                   label={false}
                 />
@@ -153,6 +164,7 @@ export class Profile extends Component {
               <div className="edit-profile-label">Interest: </div>
               <div className="edit-profile-input">
                 <Dropdown
+                  name="interest"
                   data={[
                     { name: 'Tree', value: 'tree' },
                     { name: 'Flower', value: 'flower' },
@@ -160,14 +172,29 @@ export class Profile extends Component {
                   ]}
                   containerClass="dropdownWithMarginBottom"
                   setDropdownValue={(e) => this.handleChange(e, 'dropdown')}
-                  value={interest}
+                  value={updatedItems.interest ? updatedItems.interest : interest}
                 />
               </div>
             </div>
             <div className="edit-profile-action">
-              <div className="edit-profile-button-reset" onClick={this.handleReset}>Reset</div>
-              <div className="edit-profile-button-cancel" onClick={this.handleCancel}>Cancel</div>
-              <div className="edit-profile-button-save" onClick={this.handleSave}>Save</div>
+              <div
+                className="edit-profile-button-reset"
+                onClick={this.handleReset}
+              >
+                Reset
+              </div>
+              <div
+                className="edit-profile-button-cancel"
+                onClick={this.handleCancel}
+              >
+                Cancel
+              </div>
+              <div
+                className="edit-profile-button-save"
+                onClick={this.handleSave}
+              >
+                Save
+              </div>
             </div>
           </div>
         </Modal>
@@ -176,35 +203,49 @@ export class Profile extends Component {
             classes={{ root: 'post-button-group' }}
             value={this.state.buttonState}
             exclusive
-            onChange={(e) => { this.setState({ buttonState: e.target.value }) }}
+            onChange={(e) => {
+              this.setState({ buttonState: e.target.value })
+            }}
           >
             <ToggleButton
-              value='posts'
+              value="posts"
               classes={{
                 root: 'post-button',
-                selected: 'selected-postButton'
-              }}>
+                selected: 'selected-postButton',
+              }}
+            >
               Posts
             </ToggleButton>
             <ToggleButton
-              value='liked'
+              value="liked"
               classes={{
                 root: 'post-button',
-                selected: 'selected-postButton'
-              }}>
+                selected: 'selected-postButton',
+              }}
+            >
               Liked Posts
             </ToggleButton>
           </ToggleButtonGroup>
         </div>
 
-        {
-          (this.state.buttonState === 'posts') ?
-            <div className="profile-item">
-              {this.props.posts && this.props.posts.map((item) => (
-                <ItemCard key={item._id} type={item.type} title={item.title} description={item.description} date={item.date} self={true} deleteThis={() => console.log('deleted')} />
+        {this.state.buttonState === 'posts' ? (
+          <div className="profile-item">
+            {this.props.posts &&
+              this.props.posts.map((item) => (
+                <ItemCard
+                  key={item._id}
+                  type={item.type}
+                  title={item.title}
+                  description={item.description}
+                  date={item.date}
+                  self={true}
+                  deleteThis={() => console.log('deleted')}
+                />
               ))}
-            </div> : <div> These are the liked post </div>
-        }
+          </div>
+        ) : (
+          <div> These are the liked post </div>
+        )}
       </div>
     )
   }
@@ -218,12 +259,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setActive: (page) => dispatch(uiActions.setActive(page)),
     getUserPosts: (id) => dispatch(postActions.getUserPosts(id)),
-    getUser: (id) => dispatch(userActions.getUser(id))
+    getUser: (id) => dispatch(userActions.getUser(id)),
+    updateUser: (user) => dispatch(userActions.updateUser(user)),
     // deletePost: (id) => dispatch(postActions.deletePost(id)),
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(Profile))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Profile))

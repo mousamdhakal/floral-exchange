@@ -10,6 +10,7 @@ const FormInput = ({
   value,
   handleChange,
   type,
+  inputName,
   label,
 }) => {
   return (
@@ -23,6 +24,7 @@ const FormInput = ({
         classes={{ input: 'form-input', root: 'input-root' }}
         onChange={handleChange}
         value={value}
+        name={inputName}
         placeholder={placeholder ? placeholder : ''}
         type={type ? type : 'text'}
         id={id}

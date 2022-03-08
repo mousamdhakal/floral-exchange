@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { register, login, getAllUsers } from '../services/http'
+import { register, login, getAllUsers, updateUser } from '../services/http'
 import setAuthorizationToken from '../utils/authorizationHeader';
 import * as userActions from '../actions/userActions';
 
@@ -42,10 +42,21 @@ function* loginUser(action) {
   }
 }
 
+
+function* updateUserSaga(action) {
+  try {
+    const response = yield call(updateUser, action.payload);
+    yield put({ type: userActions.UPDATE_USER_SUCCESS, payload: response.data });
+  } catch (error) {
+    yield put({ type: userActions.UPDATE_USER_FAILURE, payload: error });
+  }
+}
+
 function* userSagas() {
   yield takeLatest(userActions.REGISTER_REQUEST, registerUser);
   yield takeLatest(userActions.LOGIN_REQUEST, loginUser);
   yield takeLatest(userActions.GET_USERS_REQUEST, getUsers)
+  yield takeLatest(userActions.UPDATE_USER_REQUEST, updateUserSaga)
 }
 
 export default userSagas;

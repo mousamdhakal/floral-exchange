@@ -102,6 +102,12 @@ function userReducers(state = INITIAL_STATE, action) {
         isCalling: false,
       }
 
+    case userActions.SET_AUTHENTICATED:
+      return {
+        ...state,
+        isAuthenticated: action.payload.isAuthenticated,
+      }
+
     default:
       return state
   }

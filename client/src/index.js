@@ -4,6 +4,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { Provider } from 'react-redux'
 import setAuthorizationToken from './utils/authorizationHeader';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 import store from './store'
 import Routes from './routes'
@@ -34,6 +37,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
+        <ToastContainer theme='dark' position="bottom-right" pauseOnFocusLoss draggable />
         <App />
       </ThemeProvider>
     </Provider>

@@ -5,10 +5,10 @@ const validate = require('../../utils/validate');
 const schema = Joi.object({
   type: Joi.string().valid('plant', 'flower', 'tree').required(),
   description: Joi.string().max(1000),
-  image: Joi.string().max(255),
   age: Joi.number(),
   title: Joi.string().max(500).required(),
-  date: Joi.string().max(500).required(),
+  image: Joi.string(),
+  date: Joi.date(),
   location: Joi.object({ latitude: Joi.number().required(), longitude: Joi.number().required() }),
 })
 
@@ -31,6 +31,9 @@ const updatePostSchema = Joi.object({
  * @returns {Promise}
  */
 function postValidator(req, res, next) {
+  if(req.body.location) {
+    req.body.location = JSON.parse(req.body.location)
+  }
   return validate(req.body, schema)
     .then(() => next())
     .catch((err) => next(err));

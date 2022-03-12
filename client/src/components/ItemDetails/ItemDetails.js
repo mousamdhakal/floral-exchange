@@ -13,6 +13,7 @@ import ItemEdit from '../itemEdit/itemEdit'
 
 
 import './ItemDetails.scss'
+import { IMAGE_ENDPOINT } from '../../utils/constants'
 
 
 const ItemDetails = ({ props, onClose }) => {
@@ -71,12 +72,18 @@ const ItemDetails = ({ props, onClose }) => {
                 </div>
               </div> : null
           }
-          <FlowerPlaceholder
-            containerHeight="auto"
-            containerWidth="100%"
-            borderRadius="0px"
-            width="20vw"
-          />
+          <div className="post-image">
+            {props.image ? (
+              <img src={IMAGE_ENDPOINT + '/' + props.image} alt="item" />
+            ) : (
+              <FlowerPlaceholder
+                containerHeight="auto"
+                containerWidth="100%"
+                borderRadius="0px"
+                width="20vw"
+              />
+            )}
+          </div>
         </div>
       </div>
       <div className="post-buttons">

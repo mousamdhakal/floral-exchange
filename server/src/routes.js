@@ -1,12 +1,16 @@
 const router = require('express').Router()
 
+const { upload } = require('./utils/imageEngine')
+
 const userRouter = require('./routes/user')
 const postRouter = require('./routes/post')
 const chatRouter = require('./routes/chat')
+const imageRouter = require('./routes/image')
 
 router.use('/user', userRouter)
-router.use('/post', postRouter)
+router.use('/post', postRouter(upload))
 router.use('/chat', chatRouter)
+router.use('/image', imageRouter(upload))
 
 /**
  * GET /api

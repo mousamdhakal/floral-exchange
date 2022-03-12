@@ -20,9 +20,9 @@ export const createPost = (post) => ({
   payload: post
 })
 
-export const createPostSuccess = (message) => ({
+export const createPostSuccess = (post) => ({
   type: CREATE_POST_SUCCESS,
-  payload: message
+  payload: post
 });
 
 export const createPostFailure = (error) => ({

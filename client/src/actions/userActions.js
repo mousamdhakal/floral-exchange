@@ -18,6 +18,8 @@ export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST';
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
 export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
 
+export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
+
 export const registerRequest = (user, history) => ({
   type: REGISTER_REQUEST,
   payload: user,
@@ -93,6 +95,11 @@ export const updateUserSuccess = (user) => ({
 export const updateUserFailure = (error) => ({
   type: UPDATE_USER_FAILURE,
   payload: error
+});
+
+export const setAuthenticated = (isAuthenticated) => ({
+  type: SET_AUTHENTICATED,
+  payload: isAuthenticated
 });
 
 

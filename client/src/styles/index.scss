@@ -144,3 +144,13 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.selected-image {
+  height: 268px;
+  width: auto;
+}
+
+.post-image {
+  height: 100%;
+  display: inline;
+}

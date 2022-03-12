@@ -238,6 +238,7 @@ export class Profile extends Component {
                   type={item.type}
                   title={item.title}
                   description={item.description}
+                  image={item.image}
                   date={item.date}
                   self={true}
                   deleteThis={() => console.log('deleted')}

@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import {getAllChats, getChatWithUser } from '../services/http'
 import * as chatActions from '../actions/chatActions'
+import { toast } from 'react-toastify'
 
 function* getChats(action) {
   try {
@@ -8,6 +9,7 @@ function* getChats(action) {
     yield put({ type: chatActions.GET_CHATS_SUCCESS, payload: response.data });
   } catch (error) {
     yield put({ type: chatActions.GET_CHATS_FAILURE, payload: error });
+    toast.error(error && error.message ? error.message : 'Failed to get chats');
   }
 }
 
@@ -17,6 +19,7 @@ function* getChatDetails(action) {
     yield put({ type: chatActions.GET_CHAT_DETAILS_SUCCESS, payload: response.data });
   } catch (error) {
     yield put({ type: chatActions.GET_CHAT_DETAILS_FAILURE, payload: error });
+    toast.error(error && error.message ? error.message : 'Failed to get chat details');
   }
 }
 

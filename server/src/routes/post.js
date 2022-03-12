@@ -3,14 +3,15 @@ const { getPosts, createPost, getPostsForUser, updatePost } = require('../contro
 const { postValidator, postUpdateValidator } = require('../middlewares/validators/post');
 const authenticate = require('../middlewares/authenticate')
 
-const router = express.Router();
+const router = express.Router()
 
-// Validate input before creating a post
-router.get('/', authenticate, getPosts);
-router.get('/:id', authenticate, getPostsForUser);
+module.exports = (upload) => {
+  // Validate input before creating a post
+  router.get('/', authenticate, getPosts)
+  router.get('/:id', authenticate, getPostsForUser)
 
-router.patch('/', authenticate, postUpdateValidator, updatePost)
+  router.patch('/', authenticate, postUpdateValidator, updatePost)
 
-router.post('/create', authenticate, postValidator, createPost);
+  router.post('/create', authenticate, postValidator, createPost);
 
-module.exports = router;
+  module.exports = router;

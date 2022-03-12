@@ -43,12 +43,13 @@ function methodNotAllowedHandler(req, res) {
  * @param  {Function} next
  */
 function bodyParserHandler(err, req, res, next) {
-  res.status(err.status).json({
-    error: {
-      code: err.status,
-      message: getReasonPhrase(err.status),
-    },
-  });
+  console.log(err)
+  // res.status(err.status).json({
+  //   error: {
+  //     code: err.status,
+  //     message: getReasonPhrase(err.status),
+  //   },
+  // });
 }
 
 /**

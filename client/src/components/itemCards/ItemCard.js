@@ -9,6 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 
 import ItemDetails from '../ItemDetails/ItemDetails'
+import { IMAGE_ENDPOINT } from '../../utils/constants';
 
 const ItemCard = (props) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -16,11 +17,12 @@ const ItemCard = (props) => {
   return (
     <div className="item-box">
       <div className="item-pic" onClick={() => setIsOpen(true)}>
-        <FlowerPlaceholder
+        {props.image ? <img className='post-image' src={IMAGE_ENDPOINT +'/' + props.image} alt="item" /> : <FlowerPlaceholder
           containerHeight="125px"
           containerWidth="auto"
           borderRadius="0px"
-        />
+        />}
+        
       </div>
       <Modal open={isOpen} handleClose={() => setIsOpen(false)} props={props}>
         <ItemDetails props={props} onClose={() => setIsOpen(false)} />

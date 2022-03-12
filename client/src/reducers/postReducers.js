@@ -15,7 +15,7 @@ function postReducers(state = INITIAL_STATE, action) {
         ...state,
         error: null,
         isCalling: true,
-        post: action.payload.post,
+        post: null,
       }
 
     case postActions.CREATE_POST_SUCCESS:

@@ -77,6 +77,28 @@ function postReducers(state = INITIAL_STATE, action) {
         isCalling: false,
         userPosts: [],
       }
+
+    case postActions.UPDATE_POST_REQUEST:
+      return {
+        ...state,
+        error: null,
+        isCalling: true,
+      }
+
+    case postActions.UPDATE_POST_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        isCalling: false,
+        post: action.payload.post,
+      }
+
+    case postActions.UPDATE_POST_FAILURE:
+      return {
+        ...state,
+        error: action.payload.error,
+        isCalling: false,
+      }
     default:
       return state
   }

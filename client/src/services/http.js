@@ -72,3 +72,11 @@ export const updateUser = (user) => {
     },
   })
 }
+
+export const updatePost = (post) => {
+  return axios.patch(`${BASE_URL}/post`, post, {
+    header: {
+      'content-type': 'application.json',
+    },
+  })
+}

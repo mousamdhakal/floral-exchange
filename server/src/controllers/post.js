@@ -1,6 +1,6 @@
 const Boom = require('@hapi/boom')
 
-const { getAllPosts, createNewPost, getUserPosts } = require('../services/post')
+const { getAllPosts, createNewPost, getUserPosts, updatePostWithId } = require('../services/post')
 
 /**
  * Get information of all posts
@@ -62,5 +62,26 @@ const createPost = async (req, res, next) => {
 
 }
 
-module.exports = { getPosts, createPost, getPostsForUser }
+/**
+ * Update Post
+ * @param {Object} req Request object
+ * @param {Object} res Response object
+ * @param {Function} next Function as a reference to call next middleware
+ */
+const updatePost = async (req, res, next) => {
+
+  const postId = req.post._id
+  updatePostWithId(postId, req.body)
+    .then(post => {
+      res.status(200).json({
+        post: post,
+        status: 200,
+      })
+    })
+    .catch((err) => next(err));
+
+}
+
+
+module.exports = { getPosts, createPost, getPostsForUser, updatePost }
 

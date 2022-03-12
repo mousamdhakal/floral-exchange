@@ -10,6 +10,8 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded'
 import FormInput from '../../components/Input/FormInput'
 import { InputLabel } from '@mui/material'
 
+import * as postActions from '../../actions/postActions'
+
 import './itemEdit.scss'
 
 const ItemEdit = ({ props, onClose }) => {
@@ -19,6 +21,13 @@ const ItemEdit = ({ props, onClose }) => {
     const [tags, setTags] = useState(props.tags);
     const [type, setType] = useState(props.type);
     // console.log(title, description, tags, type);
+    const updatedItem = {
+        title: title,
+        description: description,
+        type: type,
+        tags: tags,
+    }
+
 
     return (
         <div className="edit-container">
@@ -49,8 +58,9 @@ const ItemEdit = ({ props, onClose }) => {
                     <InputLabel classes={{ root: 'form-input-label' }}>Title</InputLabel>
                     <FormInput
                         name="Title"
+                        inputName="title"
                         id="post-title"
-                        value={title}
+                        value={updatedItem.title}
                         containerClass="inputWithMarginBottom"
                         handleChange={(e) => { setTitle(e.target.value) }}
                     />
@@ -70,7 +80,7 @@ const ItemEdit = ({ props, onClose }) => {
                         id="post-tags"
                         value={tags}
                         containerClass="inputWithMarginBottom"
-                        handleChange={(e) => { setType(e.target.value) }}
+                        handleChange={(e) => { setTags(e.target.value) }}
                     />
                     <Description
                         name="Description"
@@ -83,7 +93,11 @@ const ItemEdit = ({ props, onClose }) => {
             <div className="editItem-actions">
                 <Button
                     containedButton={'contained-outlined-button quarter-width m-24'}
-                    handleClick={() => onClose()}
+                    handleClick={() => {
+                        setTitle(props.title)
+                        setType(props.type)
+                        setDescription(props.description)
+                    }}
                 >
                     Reset
                 </Button>
@@ -95,7 +109,11 @@ const ItemEdit = ({ props, onClose }) => {
                 </Button>
                 <Button
                     containedButton={'contained-full-button quarter-width m-24'}
-                    handleClick={() => onClose()}
+                    handleClick={() => {
+                        console.log(updatedItem);
+                        postActions.updatePost(updatedItem);
+                        console.log('updated');
+                    }}
                 >
                     Save Post
                 </Button>

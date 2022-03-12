@@ -54,7 +54,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   overflow: scroll;
-  height: calc(100% - 20px);
+  height: calc(100% - 200px);
   overflow-x: hidden;
   margin-top: 10px;
 }
@@ -90,7 +90,7 @@
   color: var(--dark-green);
   background-color: var(--white);
   text-transform: none;
-  border-radius: 10px;
+  border-radius: 0px;
   width: 100%;
   // border-bottom: 1px solid;
   border: 0px solid var(--mid-grey);

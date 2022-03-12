@@ -35,7 +35,7 @@ export class Profile extends Component {
   }
 
   handleChange = (e, name) => {
-    this.setState({ updatedItems:{ ...this.state.updatedItems, [e.target.name] : e.target.value} })
+    this.setState({ updatedItems: { ...this.state.updatedItems, [e.target.name]: e.target.value } })
   }
 
   initialState = {
@@ -56,6 +56,7 @@ export class Profile extends Component {
   }
 
   handleSave = () => {
+    // console.log(this.state.updatedItems)
     this.props.updateUser(this.state.updatedItems)
   }
 
@@ -74,8 +75,8 @@ export class Profile extends Component {
         <div className="profile-title">
           <div className="profile-icon">
             <ProfileIcon
-              firstName={firstName}
-              lastName={lastName}
+              firstName={this.props.user.first_name}
+              lastName={this.props.user.last_name}
               icon={null}
             />
           </div>
@@ -83,7 +84,7 @@ export class Profile extends Component {
             <p className="profile-userName">{userName}</p>
             <div>
               <p>
-                {firstName} {lastName}
+                {this.props.user.first_name} {this.props.user.last_name}
               </p>
             </div>
             <div
@@ -151,7 +152,7 @@ export class Profile extends Component {
               <div className="edit-profile-label">Location: </div>
               <div className="edit-profile-input">
                 <FormInput
-                inputName = "location"
+                  inputName="location"
                   name="location"
                   type="text"
                   value={updatedItems.location ? updatedItems.location : location}

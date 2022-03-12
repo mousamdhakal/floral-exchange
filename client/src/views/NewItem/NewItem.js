@@ -126,7 +126,7 @@ export class NewItems extends Component {
       newPost.location = location
     }
 
-    if(this.state.uploadedImage) {
+    if (this.state.uploadedImage) {
       formData.append('image', this.state.uploadedImage)
     }
 
@@ -177,6 +177,7 @@ export class NewItems extends Component {
             </div>
           </div>
           <div className="half-width flex-column-half">
+            <InputLabel classes={{ root: 'form-input-label' }}>Title</InputLabel>
             <FormInput
               name="Title"
               id="post-title"

@@ -1,0 +1,61 @@
+.edit-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.close-button {
+  color: #f00;
+  cursor: pointer;
+}
+
+.column-divider {
+  // background-color: blue;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.left-container {
+  // width: 50%;
+  // height: 100%;
+  display: flex;
+  flex-direction: column;
+  // justify-content: space-between;
+  align-items: center;
+  // background-color: green;
+  margin-right: 60px;
+}
+
+.right-container {
+  // background-color: cadetblue;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+.editItem-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  margin-top: 20px;
+  // background-color: red;
+}
+
+.update-button {
+  margin-top: 20px;
+}

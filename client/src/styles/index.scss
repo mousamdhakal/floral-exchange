@@ -1,10 +1,10 @@
-body{
+body {
   background-color: var(--grey-1);
 }
 
-// 
+//
 // For authentication pages
-// 
+//
 
 .login-wrapper {
   display: flex;
@@ -28,7 +28,8 @@ body{
   display: flex;
 }
 
-.login-image-container, .login-formarea {
+.login-image-container,
+.login-formarea {
   flex: 1;
 }
 
@@ -47,7 +48,7 @@ body{
   height: 40px;
   color: var(--dark-green);
   background-color: var(--white);
-  text-transform: none ;
+  text-transform: none;
   border-radius: 10px;
   border: 1px solid var(--mid-grey);
   width: 140px;
@@ -68,9 +69,9 @@ body{
   width: 50%;
 }
 
-// 
+//
 // For navbar and overall layout
-// 
+//
 
 .fullpage-contianer {
   display: flex;
@@ -136,7 +137,7 @@ body{
   background-color: var(--light-grey);
 }
 
-.newItem-actions{
+.newItem-actions {
   position: absolute;
   width: calc(100% - 44px * 2);
   bottom: 12px;
@@ -146,7 +147,7 @@ body{
 
 .selected-image {
   height: 268px;
-  width: auto
+  width: auto;
 }
 
 .post-image {

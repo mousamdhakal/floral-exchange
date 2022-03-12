@@ -57,34 +57,56 @@ function userReducers(state = INITIAL_STATE, action) {
         error: action.payload
       }
 
-      case userActions.GET_USERS_REQUEST:
-        return {
-          ...state,
-          error: null,
-          isCalling: true,
-        }
-  
-      case userActions.GET_USERS_SUCCESS:
-        return {
-          ...state,
-          error: null,
-          isCalling: false,
-          users: action.payload.users,
-        }
-  
-      case userActions.GET_USERS_FAILURE:
-        return {
-          ...state,
-          error: action.payload.error,
-          isCalling: false,
-          users: [],
-        }
-      
-      case userActions.SET_AUTHENTICATED:
-        return {
-          ...state,
-          isAuthenticated: action.payload.isAuthenticated,
-        }
+    case userActions.GET_USERS_REQUEST:
+      return {
+        ...state,
+        error: null,
+        isCalling: true,
+      }
+
+    case userActions.GET_USERS_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        isCalling: false,
+        users: action.payload.users,
+      }
+
+    case userActions.GET_USERS_FAILURE:
+      return {
+        ...state,
+        error: action.payload.error,
+        isCalling: false,
+        users: [],
+      }
+
+    case userActions.UPDATE_USER_REQUEST:
+      return {
+        ...state,
+        error: null,
+        isCalling: true,
+      }
+
+    case userActions.UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        isCalling: false,
+        user: action.payload.user,
+      }
+
+    case userActions.UPDATE_USER_FAILURE:
+      return {
+        ...state,
+        error: action.payload.error,
+        isCalling: false,
+      }
+
+    case userActions.SET_AUTHENTICATED:
+      return {
+        ...state,
+        isAuthenticated: action.payload.isAuthenticated,
+      }
 
     default:
       return state

@@ -1,9 +1,9 @@
-import {useState} from 'react'
+import { useState } from 'react'
 
 import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 
-const ToggleButtons = ({states, initialState, handleChange}) => {
+const ToggleButtons = ({ states, initialState, handleChange }) => {
   const [buttonState, setButtonState] = useState(initialState)
 
   const changeHandler = (e) => {

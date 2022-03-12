@@ -8,7 +8,12 @@ const userSchema = mongoose.Schema({
     type: String,
     unique: true
   },
-  password: String
+  password: String,
+  location: Object,
+  interest: {
+    type: String,
+    enum: ['plant', 'flower', 'tree']
+  },
 });
 
 const User = mongoose.model('User', userSchema);

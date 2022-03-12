@@ -10,6 +10,11 @@ export const GET_USER_POSTS_REQUEST = 'GET_USER_POSTS_REQUEST';
 export const GET_USER_POSTS_SUCCESS = 'GET_USER_POSTS_SUCCESS';
 export const GET_USER_POSTS_FAILURE = 'GET_USER_POSTS_FAILURE';
 
+export const UPDATE_POST_REQUEST = 'UPDATE_POST_REQUEST';
+export const UPDATE_POST_SUCCESS = 'UPDATE_POST_SUCCESS';
+export const UPDATE_POST_FAILURE = 'UPDATE_POST_FAILURE';
+
+
 export const createPost = (post) => ({
   type: CREATE_POST_REQUEST,
   payload: post
@@ -52,5 +57,20 @@ export const getUserPostsSuccess = (posts) => ({
 
 export const getUserPostsFailure = (error) => ({
   type: GET_USER_POSTS_FAILURE,
+  payload: error
+});
+
+export const updatePost = (postData) => ({
+  type: UPDATE_POST_REQUEST,
+  payload: postData
+})
+
+export const updatePostSuccess = (post) => ({
+  type: UPDATE_POST_SUCCESS,
+  payload: post
+});
+
+export const updatePostFailure = (error) => ({
+  type: UPDATE_POST_FAILURE,
   payload: error
 });

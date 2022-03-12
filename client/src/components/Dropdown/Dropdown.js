@@ -3,7 +3,7 @@ import Select from '@mui/material/Select'
 
 import './Dropdown.scss'
 
-const Dropdown = ({ data, containerClass, setDropdownValue, value }) => {
+const Dropdown = ({ data, containerClass, setDropdownValue, value, name }) => {
   const handleChange = (e) => {
     if (setDropdownValue) {
       setDropdownValue(e)
@@ -17,7 +17,7 @@ const Dropdown = ({ data, containerClass, setDropdownValue, value }) => {
         classes={{ root: 'dropdown' }}
         onChange={handleChange}
         displayEmpty
-        inputProps={{ 'aria-label': 'Without label' }}
+        inputProps={{ 'aria-label': 'Without label', 'name': name }}
       >
         {/* {data.forEach(option => {
           <MenuItem key={option.value} value={option.value}>{option.name}</MenuItem>

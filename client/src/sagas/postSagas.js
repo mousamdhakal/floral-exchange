@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { createPost, getAllPosts, getPostsForUserAPI } from '../services/http'
+import { createPost, getAllPosts, getPostsForUserAPI, updatePost } from '../services/http'
 import * as postActions from '../actions/postActions'
 import { toast } from 'react-toastify'
 
@@ -43,10 +43,20 @@ function* getPostsForUser(action) {
   }
 }
 
+function* updatePostSaga(action) {
+  try {
+    const response = yield call(updatePost, action.payload);
+    yield put({ type: postActions.UPDATE_POST_SUCCESS, payload: response.data });
+  } catch (error) {
+    yield put({ type: postActions.UPDATE_POST_FAILURE, payload: error });
+  }
+}
+
 function* postSagas() {
-  yield takeLatest(postActions.CREATE_POST_REQUEST, createNewPost)
-  yield takeLatest(postActions.GET_POSTS_REQUEST, getPosts)
-  yield takeLatest(postActions.GET_USER_POSTS_REQUEST, getPostsForUser)
+  yield takeLatest(postActions.CREATE_POST_REQUEST, createNewPost);
+  yield takeLatest(postActions.GET_POSTS_REQUEST, getPosts);
+  yield takeLatest(postActions.GET_USER_POSTS_REQUEST, getPostsForUser);
+  yield takeLatest(postActions.UPDATE_POST_REQUEST, updatePostSaga);
 }
 
 export default postSagas

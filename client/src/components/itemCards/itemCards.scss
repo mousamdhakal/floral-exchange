@@ -54,10 +54,20 @@
 .item-like {
   @extend %image-center;
   margin-left: 10px;
+  cursor: pointer;
 }
 .item-comment {
   @extend %image-center;
   margin-left: 10px;
+  cursor: pointer;
+}
+.item-delete {
+  @extend %image-center;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 %image-center {

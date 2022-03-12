@@ -54,9 +54,21 @@ function createNewPost(post, imageName) {
     .then((post) => post);
 }
 
+/**
+ * Update a post
+ * 
+ * @param {String} id ID of post to update
+ * @param {Object} post parameter to update
+ * return updated post info
+ */
+function updatePostWithId(id, post) {
+  return Post.findOneAndUpdate({ _id: id }, post, { new: true }).exec()
+}
+
 module.exports = {
   getPost,
   getAllPosts,
   createNewPost,
   getUserPosts,
+  updatePostWithId,
 }

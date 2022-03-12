@@ -45,8 +45,8 @@ export class Login extends Component {
         {
           email: this.state.email,
           password: this.state.password,
-          // first_name: this.state.firstName, 
-          // last_name: this.state.lastName,
+          first_name: this.state.firstName,
+          last_name: this.state.lastName,
           user_name: this.state.userName
         }, this.props.history)
     } else if (this.state.buttonState === 'signIn') {
@@ -83,7 +83,7 @@ export class Login extends Component {
             </div>
             {buttonState === 'signUp' && (
               <>
-                {/* <FormInput
+                <FormInput
                   containerClass={'half-width-container'}
                   name="First Name"
                   id="first-name"
@@ -91,14 +91,14 @@ export class Login extends Component {
                   handleChange={(e) => this.handleChange(e, 'firstName')}
                 />
                 <FormInput
-                  containerClass={'half-width-container mt-24 mb-24'}
+                  containerClass={'half-width-container'}
                   name="Last Name"
                   id="last-name"
                   value={lastName}
                   handleChange={(e) => this.handleChange(e, 'lastName')}
-                /> */}
+                />
                 <FormInput
-                  containerClass={'half-width-container mt-24 mb-24'}
+                  containerClass={'half-width-container'}
                   name="User Name"
                   id="user-name"
                   value={userName}
@@ -114,7 +114,7 @@ export class Login extends Component {
               handleChange={(e) => this.handleChange(e, 'email')}
             />
             <FormInput
-              containerClass={'half-width-container mt-24'}
+              containerClass={'half-width-container '}
               name="Password"
               id="login-password"
               value={password}

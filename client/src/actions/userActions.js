@@ -10,6 +10,14 @@ export const GET_USERS_REQUEST = 'GET_USERS_REQUEST';
 export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
 export const GET_USERS_FAILURE = 'GET_USERS_FAILURE';
 
+export const GET_USER_REQUEST = 'GET_USER_REQUEST';
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
+export const GET_USER_FAILURE = 'GET_USER_FAILURE';
+
+export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST';
+export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
+export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
+
 export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 
 export const registerRequest = (user, history) => ({
@@ -56,6 +64,36 @@ export const getUsersSuccess = (users) => ({
 
 export const getUsersFailure = (error) => ({
   type: GET_USERS_FAILURE,
+  payload: error
+});
+
+export const getUser = (id) => ({
+  type: GET_USER_REQUEST,
+  payload: id,
+})
+
+export const getUserSuccess = (posts) => ({
+  type: GET_USER_SUCCESS,
+  payload: posts
+});
+
+export const getUserFailure = (error) => ({
+  type: GET_USER_FAILURE,
+  payload: error
+});
+
+export const updateUser = (userData) => ({
+  type: UPDATE_USER_REQUEST,
+  payload: userData
+})
+
+export const updateUserSuccess = (user) => ({
+  type: UPDATE_USER_SUCCESS,
+  payload: user
+});
+
+export const updateUserFailure = (error) => ({
+  type: UPDATE_USER_FAILURE,
   payload: error
 });
 

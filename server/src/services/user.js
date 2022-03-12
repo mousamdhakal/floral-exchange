@@ -19,7 +19,7 @@ const User = require('../models/User');
  * @param   {String}  email
  * @returns {Promise}
  */
- function getUser(email) {
+function getUser(email) {
   return User.findOne({ email }).exec()
 }
 
@@ -41,18 +41,28 @@ const User = require('../models/User');
  * @param   {Object}  user
  * @returns {Promise}
  */
- function createUser(user) {
+function createUser(user) {
   const newUser = new User(user)
 
   return newUser.save()
-  .then((user) => user)
+    .then((user) => user)
     .catch(err => {
-      if(err.code === 11000){
+      if (err.code === 11000) {
         throw Boom.conflict(`User with email ${user.email} already exists`)
       } else {
         throw err
       }
     });
+}
+
+/**
+ * 
+ * @param {String} id Id of user to update
+ * @param {Object} user parameters to update
+ * @returns Updated user Info
+ */
+function updateUserWithId(id, user) {
+  return User.findOneAndUpdate({ _id: id }, user, { new: true }).exec()
 }
 
 
@@ -61,5 +71,6 @@ module.exports = {
   getUser,
   createUser,
   getAllUsers,
-  getUserFromId
+  getUserFromId,
+  updateUserWithId
 }

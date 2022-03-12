@@ -8,10 +8,13 @@ const router = express.Router()
 module.exports = (upload) => {
   // Validate input before creating a post
   router.get('/', authenticate, getPosts)
+
   router.get('/:id', authenticate, getPostsForUser)
 
   router.patch('/', authenticate, postUpdateValidator, updatePost)
 
-  router.post('/create', authenticate, postValidator, createPost);
+  router.post('/create', authenticate, upload.single('image'), postValidator, createPost)
 
-  module.exports = router;
+  return router;
+
+}

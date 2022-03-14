@@ -6,11 +6,13 @@ const userRouter = require('./routes/user')
 const postRouter = require('./routes/post')
 const chatRouter = require('./routes/chat')
 const imageRouter = require('./routes/image')
+const contactRouter = require('./routes/contact')
 
 router.use('/user', userRouter)
 router.use('/post', postRouter(upload))
 router.use('/chat', chatRouter)
 router.use('/image', imageRouter(upload))
+router.use('/contact', contactRouter)
 
 /**
  * GET /api

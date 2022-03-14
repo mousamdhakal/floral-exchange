@@ -10,7 +10,7 @@ const Post = require('../models/Post');
  * @returns {Promise}
  */
 function getPost(id) {
-  return Post.findOne({ _id }).exec()
+  return Post.findOne({ _id: id }).exec()
 }
 
 /**

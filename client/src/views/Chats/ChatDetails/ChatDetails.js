@@ -7,6 +7,9 @@ import SendIcon from '@mui/icons-material/Send'
 const ChatDetails = ({ handleSendMessage }) => {
   const [message, setMessage] = useState('')
   const user = useSelector((state) => state.user.user)
+  const lastContact = useSelector((state) => state.chat.contact)
+  console.log('>>>>>>>>>>>>>>>>',lastContact)
+
   const chatDetails = useSelector((state) => state.chat.chatDetails).sort(
     (a, b) => a.date - b.date
   )
@@ -57,7 +60,6 @@ const ChatDetails = ({ handleSendMessage }) => {
               )
             })}
             <div
-              style={{ float: 'left', clear: 'both' }}
               ref={(el) => {
                 messagesEnd = el
               }}

@@ -80,3 +80,19 @@ export const updatePost = (post) => {
     },
   })
 }
+
+export const contactUserForPost = (postId) => {
+  return axios.post(`${BASE_URL}/contact/${postId}`,null, {
+    header: {
+      'content-type': 'application.json',
+    },
+  })
+}
+
+export const getContactWithUser = (userId) => {
+  return axios.get(`${BASE_URL}/contact/${userId}`, {
+    header: {
+      'content-type': 'application.json',
+    },
+  })
+}

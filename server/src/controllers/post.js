@@ -1,7 +1,7 @@
 const Boom = require('@hapi/boom')
 const { saveImage } = require('../services/image')
 
-const { getAllPosts, createNewPost, getUserPosts, updatePostWithId } = require('../services/post')
+const { getAllPosts, createNewPost, getUserPosts, updatePostWithId, deletePostWithId } = require('../services/post')
 
 /**
  * Get information of all posts
@@ -10,14 +10,16 @@ const { getAllPosts, createNewPost, getUserPosts, updatePostWithId } = require('
  * @param {Function} next Function as a reference to call next middleware
  */
 const getPosts = async (req, res, next) => {
-  getAllPosts()
-    .then((posts) => {
-      res.status(200).json({
-        posts: posts,
-        status: 200,
+  setTimeout(() =>
+    getAllPosts()
+      .then((posts) => {
+        res.status(200).json({
+          posts: posts,
+          status: 200,
+        })
       })
-    })
-    .catch((err) => next(err))
+      .catch((err) => next(err)), 500
+  )
 }
 
 /**
@@ -27,14 +29,16 @@ const getPosts = async (req, res, next) => {
  * @param {Function} next Function as a reference to call next middleware
  */
 const getPostsForUser = async (req, res, next) => {
-  getUserPosts(req.params.id)
-    .then((posts) => {
-      res.status(200).json({
-        posts: posts,
-        status: 200,
+  setTimeout(() =>
+    getUserPosts(req.params.id)
+      .then((posts) => {
+        res.status(200).json({
+          posts: posts,
+          status: 200,
+        })
       })
-    })
-    .catch((err) => next(err))
+      .catch((err) => next(err)), 500
+  )
 }
 
 /**
@@ -63,20 +67,21 @@ const createPost = async (req, res, next) => {
   }
 
   function savePostAfterImageProcessing() {
-    createNewPost(post, imageToReturn && imageToReturn.filename ? imageToReturn.filename : null)
-      .then((createdPost) => {
-        const modifiedPost = JSON.parse(JSON.stringify(createdPost))
-        if (imageToReturn) {
-          modifiedPost.image = imageToReturn
-        }
-        console.log(modifiedPost)
-        res.status(200).json({
-          message: 'Post created successfully',
-          post: modifiedPost,
-          status: 200,
+    setTimeout(() =>
+      createNewPost(post, imageToReturn && imageToReturn.filename ? imageToReturn.filename : null)
+        .then((createdPost) => {
+          const modifiedPost = JSON.parse(JSON.stringify(createdPost))
+          if (imageToReturn) {
+            modifiedPost.image = imageToReturn
+          }
+          console.log(modifiedPost)
+          res.status(200).json({
+            message: 'Post created successfully',
+            post: modifiedPost,
+            status: 200,
+          })
         })
-      })
-      .catch((err) => next(err))
+        .catch((err) => next(err)), 500)
   }
 }
 
@@ -100,6 +105,19 @@ const updatePost = async (req, res, next) => {
 
 }
 
+const deletePost = async (req, res, next) => {
+  const postId = req.params.id
+  console.log('hi>>>>')
+  console.log(postId)
+  deletePostWithId(postId)
+    .then(() => {
+      res.status(200).json({
+        message: 'Post deleted successfully',
+        status: 200,
+      })
+    })
+    .catch((err) => next(err));
+}
 
-module.exports = { getPosts, createPost, getPostsForUser, updatePost }
+module.exports = { getPosts, createPost, getPostsForUser, updatePost, deletePost }
 

@@ -3,6 +3,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
+import PulseLoader from "react-spinners/PulseLoader";
+import { css } from "@emotion/react";
+import './NewItem.scss';
 
 import * as uiActions from '../../actions/uiActions'
 import * as postActions from '../../actions/postActions'
@@ -14,12 +17,17 @@ import Tags from '../../components/Tags/Tags'
 import Dropdown from '../../components/Dropdown/Dropdown'
 import { InputLabel } from '@mui/material'
 
+const override = css`
+display: block;
+margin: 0 auto;
+border-color: red;
+`;
+
 export class NewItems extends Component {
   constructor(props) {
     super(props)
     this.state = {
       title: '',
-      tags: '',
       description: '',
       type: '',
       uploadedImage: {},
@@ -29,20 +37,22 @@ export class NewItems extends Component {
 
   componentDidMount() {
     this.props.setActive('newItem')
+    // this.props.createPost()
   }
 
   initialState = {
     title: '',
-    tags: '',
     description: '',
     type: '',
+    uploadedImage: {},
+    uploadedImageUrl: '',
   }
 
   handleChange = (e, name) => {
     if (name === 'title') {
       this.setState({ title: e.target.value })
-    } else if (name === 'tags') {
-      this.setState({ tags: e.target.value })
+      // } else if (name === 'tags') {
+      //   this.setState({ tags: e.target.value })
     } else if (name === 'description') {
       this.setState({ description: e.target.value })
     } else if (name === 'dropdown') {
@@ -93,7 +103,7 @@ export class NewItems extends Component {
   }
 
   createPost = (location) => {
-    const { title, tags, description, type } = this.state
+    const { title, description, type } = this.state
     const newPost = {}
 
     const formData = new FormData()
@@ -112,9 +122,9 @@ export class NewItems extends Component {
       console.log('type is required')
     }
 
-    if (tags) {
-      formData.append('tags', tags)
-    }
+    // if (tags) {
+    //   formData.append('tags', tags)
+    // }
 
     if (description) {
       formData.append('description', description)
@@ -131,6 +141,7 @@ export class NewItems extends Component {
     }
 
     this.props.createPost(formData)
+    this.resetPost()
 
     // window.location.href = '/profile';
   }
@@ -140,7 +151,7 @@ export class NewItems extends Component {
   }
 
   render() {
-    const { title, tags, description, type } = this.state
+    const { title, description, type } = this.state
     return (
       <>
         <Typography classes={{ h5: 'page-heading' }} variant="h5">
@@ -177,7 +188,7 @@ export class NewItems extends Component {
             </div>
           </div>
           <div className="half-width flex-column-half">
-            <InputLabel classes={{ root: 'form-input-label' }}>Title</InputLabel>
+            {/* <InputLabel classes={{ root: 'form-input-label' }}>Title</InputLabel> */}
             <FormInput
               name="Title"
               id="post-title"
@@ -196,13 +207,13 @@ export class NewItems extends Component {
               setDropdownValue={(e) => this.handleChange(e, 'dropdown')}
               value={type}
             />
-            <Tags
+            {/* <Tags
               name="Tags"
               id="post-tags"
               value={tags}
               containerClass="inputWithMarginBottom"
               handleChange={(e) => this.handleChange(e, 'tags')}
-            />
+            /> */}
             <Description
               name="Description"
               id="post-description"
@@ -216,7 +227,22 @@ export class NewItems extends Component {
             containedButton={'contained-full-button quarter-width m-24'}
             handleClick={this.savePost}
           >
-            Create Post
+            {this.props.loading ?
+              (
+                <div className="add-post-loader">
+                  <PulseLoader
+                    color={'green'}
+                    loading={this.props.loading}
+                    css={override}
+                    size={10}
+                  /> Creating Post
+                </div>
+              )
+              : (
+                <>
+                  Create Post
+                </>
+              )}
           </Button>
           <Button
             containedButton={'contained-outlined-button quarter-width m-24'}
@@ -231,7 +257,7 @@ export class NewItems extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.user.user }
+  return { user: state.user.user, loading: state.post.isCalling }
 }
 
 const mapDispatchToProps = (dispatch) => {

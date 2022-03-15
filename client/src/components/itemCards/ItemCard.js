@@ -17,12 +17,11 @@ const ItemCard = (props) => {
   return (
     <div className="item-box">
       <div className="item-pic" onClick={() => setIsOpen(true)}>
-        {props.image ? <img className='post-image' src={IMAGE_ENDPOINT +'/' + props.image} alt="item" /> : <FlowerPlaceholder
+        {props.image ? <img className='post-image' src={IMAGE_ENDPOINT + '/' + props.image} alt="item" /> : <FlowerPlaceholder
           containerHeight="125px"
           containerWidth="auto"
           borderRadius="0px"
         />}
-        
       </div>
       <Modal open={isOpen} handleClose={() => setIsOpen(false)} props={props}>
         <ItemDetails props={props} onClose={() => setIsOpen(false)} />
@@ -44,7 +43,6 @@ const ItemCard = (props) => {
                 <MessageIcon />
               </div>
             </div> :
-
               <div className="item-delete" onClick={() => props.deleteThis()}>
                 <DeleteIcon
                   style={{

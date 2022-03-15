@@ -72,9 +72,9 @@ export const getUser = (id) => ({
   payload: id,
 })
 
-export const getUserSuccess = (posts) => ({
+export const getUserSuccess = (user) => ({
   type: GET_USER_SUCCESS,
-  payload: posts
+  payload: user,
 });
 
 export const getUserFailure = (error) => ({

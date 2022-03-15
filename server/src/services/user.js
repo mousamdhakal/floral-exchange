@@ -8,7 +8,7 @@ const User = require('../models/User');
  * @param   
  * @returns {Promise}
  */
- function getAllUsers() {
+function getAllUsers() {
   return User.find().exec()
 }
 
@@ -30,7 +30,7 @@ function getUser(email) {
  * @param   {String}  id
  * @returns {Promise}
  */
- function getUserFromId(id) {
+function getUserFromId(id) {
   return User.findOne({ _id: id }).exec()
 }
 
@@ -66,11 +66,23 @@ function updateUserWithId(id, user) {
 }
 
 
+/**
+ * 
+ * @param {String} id Id of user to delete
+ * @returns user Info
+ */
+function getAUser(id) {
+  console.log(id, '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+  return User.findOne({ _id: id }).exec()
+}
+
+
 
 module.exports = {
   getUser,
   createUser,
   getAllUsers,
   getUserFromId,
-  updateUserWithId
+  updateUserWithId,
+  getAUser,
 }

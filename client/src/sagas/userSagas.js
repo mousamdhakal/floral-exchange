@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { register, login, getAllUsers, updateUser } from '../services/http'
+import { register, login, getAllUsers, updateUser, getUserInfo } from '../services/http'
 import setAuthorizationToken from '../utils/authorizationHeader';
 import * as userActions from '../actions/userActions';
 import { toast } from 'react-toastify';
@@ -28,6 +28,16 @@ function* getUsers(action) {
   } catch (error) {
     yield put({ type: userActions.GET_USERS_FAILURE, payload: error });
     toast.error(error && error.message ? error.message : 'Failed to get users')
+  }
+}
+function* getUser(action) {
+  try {
+    console.log('called');
+    const response = yield call(getUserInfo, action.payload);
+    yield put({ type: userActions.GET_USER_SUCCESS, payload: response.data });
+  } catch (error) {
+    yield put({ type: userActions.GET_USER_FAILURE, payload: error });
+    toast.error(error && error.message ? error.message : 'Failed to get user')
   }
 }
 
@@ -61,8 +71,9 @@ function* updateUserSaga(action) {
 function* userSagas() {
   yield takeLatest(userActions.REGISTER_REQUEST, registerUser);
   yield takeLatest(userActions.LOGIN_REQUEST, loginUser);
-  yield takeLatest(userActions.GET_USERS_REQUEST, getUsers)
-  yield takeLatest(userActions.UPDATE_USER_REQUEST, updateUserSaga)
+  yield takeLatest(userActions.GET_USERS_REQUEST, getUsers);
+  yield takeLatest(userActions.GET_USER_REQUEST, getUser);
+  yield takeLatest(userActions.UPDATE_USER_REQUEST, updateUserSaga);
 }
 
 export default userSagas;

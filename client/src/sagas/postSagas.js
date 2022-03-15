@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { createPost, getAllPosts, getPostsForUserAPI, updatePost } from '../services/http'
+import { createPost, getAllPosts, getPostsForUserAPI, updatePost, deletePost } from '../services/http'
 import * as postActions from '../actions/postActions'
 import { toast } from 'react-toastify'
 
@@ -52,11 +52,23 @@ function* updatePostSaga(action) {
   }
 }
 
+function* deletePostSaga(action) {
+  try {
+    const response = yield call(deletePost, action.payload);
+    yield put({ type: postActions.DELETE_POST_SUCCESS, payload: action.payload });
+    toast.success('Post deleted successfully')
+  } catch (error) {
+    yield put({ type: postActions.DELETE_POST_FAILURE, payload: error });
+    toast.error(error && error.message ? error.message : 'Failed to delete post')
+  }
+}
+
 function* postSagas() {
   yield takeLatest(postActions.CREATE_POST_REQUEST, createNewPost);
   yield takeLatest(postActions.GET_POSTS_REQUEST, getPosts);
   yield takeLatest(postActions.GET_USER_POSTS_REQUEST, getPostsForUser);
   yield takeLatest(postActions.UPDATE_POST_REQUEST, updatePostSaga);
+  yield takeLatest(postActions.DELETE_POST_REQUEST, deletePostSaga);
 }
 
 export default postSagas

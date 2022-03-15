@@ -57,27 +57,27 @@ function userReducers(state = INITIAL_STATE, action) {
         error: action.payload
       }
 
-    case userActions.GET_USERS_REQUEST:
+    case userActions.GET_USER_REQUEST:
       return {
         ...state,
         error: null,
         isCalling: true,
       }
 
-    case userActions.GET_USERS_SUCCESS:
+    case userActions.GET_USER_SUCCESS:
       return {
         ...state,
         error: null,
         isCalling: false,
-        users: action.payload.users,
+        user: action.payload.user,
       }
 
-    case userActions.GET_USERS_FAILURE:
+    case userActions.GET_USER_FAILURE:
       return {
         ...state,
         error: action.payload.error,
         isCalling: false,
-        users: [],
+        user: [],
       }
 
     case userActions.UPDATE_USER_REQUEST:

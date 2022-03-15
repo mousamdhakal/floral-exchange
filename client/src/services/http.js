@@ -49,6 +49,14 @@ export const getAllUsers = () => {
   })
 }
 
+export const getUserInfo = (id) => {
+  return axios.get(`${BASE_URL}/user/${id}`, {
+    headers: {
+      'content-type': 'application/json',
+    },
+  })
+}
+
 export const getAllChats = () => {
   return axios.get(`${BASE_URL}/chat`, {
     headers: {
@@ -77,6 +85,14 @@ export const updatePost = (post) => {
   return axios.patch(`${BASE_URL}/post`, post, {
     header: {
       'content-type': 'application.json',
+    },
+  })
+}
+
+export const deletePost = (id) => {
+  return axios.delete(`${BASE_URL}/post/${id}`, {
+    headers: {
+      'content-type': 'application/json',
     },
   })
 }

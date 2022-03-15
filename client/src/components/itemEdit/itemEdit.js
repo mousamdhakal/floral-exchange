@@ -18,14 +18,12 @@ const ItemEdit = ({ props, onClose }) => {
     const [edit, setEdit] = useState(false);
     const [title, setTitle] = useState(props.title);
     const [description, setDescription] = useState(props.description);
-    const [tags, setTags] = useState(props.tags);
     const [type, setType] = useState(props.type);
     // console.log(title, description, tags, type);
     const updatedItem = {
         title: title,
         description: description,
         type: type,
-        tags: tags,
     }
 
 
@@ -75,13 +73,13 @@ const ItemEdit = ({ props, onClose }) => {
                         containerClass="dropdownWithMarginBottom"
                         setDropdownValue={(e) => { setType(e.target.value) }}
                     />
-                    <Tags
+                    {/* <Tags
                         name="Tags"
                         id="post-tags"
                         value={tags}
                         containerClass="inputWithMarginBottom"
                         handleChange={(e) => { setTags(e.target.value) }}
-                    />
+                    /> */}
                     <Description
                         name="Description"
                         id="post-description"

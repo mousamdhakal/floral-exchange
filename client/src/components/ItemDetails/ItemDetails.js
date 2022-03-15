@@ -49,7 +49,7 @@ const ItemDetails = ({ props, onClose }) => {
         </div>
 
         <div className="post-image">
-          {
+          {/* {
             props.self ?
               <div className="post-option">
                 <div className="post-option-button" onClick={handleClick}>
@@ -71,7 +71,7 @@ const ItemDetails = ({ props, onClose }) => {
                   </Modal>
                 </div>
               </div> : null
-          }
+          } */}
           <div className="post-image">
             {props.image ? (
               <img src={IMAGE_ENDPOINT + '/' + props.image} alt="item" />
@@ -93,7 +93,6 @@ const ItemDetails = ({ props, onClose }) => {
               containedButton={
                 'contained-full-button quarter-width m-24 contact-button'
               }
-
             // handleClick={this.savePost}
             >
               Contact owner
@@ -103,7 +102,7 @@ const ItemDetails = ({ props, onClose }) => {
               containedButton={
                 'contained-delete-button quarter-width m-24 contact-button'
               }
-            // handleDelete ={this.deletePost}
+              handleClick={() => props.deleteThis()}
             >
               Delete Item
               <DeleteOutlineIcon className="delete-icon" />

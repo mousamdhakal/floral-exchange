@@ -44,10 +44,10 @@ function getUserPosts(id) {
  */
 function createNewPost(post, imageName) {
   const modifiedPost = JSON.parse(JSON.stringify(post))
-  if(imageName) {
-    modifiedPost.image  = imageName
+  if (imageName) {
+    modifiedPost.image = imageName
   }
-  
+
   const newPost = new Post(modifiedPost)
 
   return newPost.save()
@@ -65,10 +65,20 @@ function updatePostWithId(id, post) {
   return Post.findOneAndUpdate({ _id: id }, post, { new: true }).exec()
 }
 
+/**
+ * 
+ * @param {String} id id of post to delete
+ * @returns 
+ */
+function deletePostWithId(id) {
+  return Post.findOneAndDelete({ _id: id }).exec()
+}
+
 module.exports = {
   getPost,
   getAllPosts,
   createNewPost,
   getUserPosts,
   updatePostWithId,
+  deletePostWithId,
 }

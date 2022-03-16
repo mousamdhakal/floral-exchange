@@ -65,7 +65,7 @@ const ItemDetails = ({ props, onClose }) => {
         </div>
 
         <div className="post-image">
-          {props.self ? (
+          {/* {props.self ? (
             <div className="post-option">
               <div className="post-option-button" onClick={handleMenuOpen}>
                 <MoreHorizIcon />
@@ -90,7 +90,7 @@ const ItemDetails = ({ props, onClose }) => {
                 </Modal>
               </div>
             </div>
-          ) : null}
+          ) : null} */}
           <div className="post-image">
             {props.image ? (
               <img src={IMAGE_ENDPOINT + '/' + props.image} alt="item" />
@@ -106,27 +106,27 @@ const ItemDetails = ({ props, onClose }) => {
         </div>
       </div>
       <div className="post-buttons">
-        {!props.self ? (
-          <Button
-            containedButton={
-              'contained-full-button quarter-width m-24 contact-button'
-            }
-            handleClick={contactOwner}
-          >
-            Contact owner
-            <SendIcon className="contact-owner-icon" />
-          </Button>
-        ) : (
-          <Button
-            containedButton={
-              'contained-delete-button quarter-width m-24 contact-button'
-            }
-            // handleDelete ={this.deletePost}
-          >
-            Delete Item
-            <DeleteOutlineIcon className="delete-icon" />
-          </Button>
-        )}
+        {
+          !props.self ?
+            <Button
+              containedButton={
+                'contained-full-button quarter-width m-24 contact-button'
+              }
+            // handleClick={this.savePost}
+            >
+              Contact owner
+              <SendIcon className="contact-owner-icon" />
+            </Button> :
+            <Button
+              containedButton={
+                'contained-delete-button quarter-width m-24 contact-button'
+              }
+              handleClick={() => props.deleteThis()}
+            >
+              Delete Item
+              <DeleteOutlineIcon className="delete-icon" />
+            </Button>
+        }
         <Button
           containedButton={'contained-outlined-button quarter-width m-24'}
           handleClick={onClose}

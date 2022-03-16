@@ -21,7 +21,7 @@ const Tags = ({
         onChange={handleChange}
         value={value}
         placeholder={placeholder ? placeholder : ''}
-        type={type ? type: 'text'}
+        type={type ? type : 'text'}
         id={id}
       />
     </div>

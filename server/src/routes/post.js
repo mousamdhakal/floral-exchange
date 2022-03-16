@@ -1,5 +1,5 @@
 const express = require('express');
-const { getPosts, createPost, getPostsForUser, updatePost } = require('../controllers/post');
+const { getPosts, createPost, getPostsForUser, updatePost, deletePost } = require('../controllers/post');
 const { postValidator, postUpdateValidator } = require('../middlewares/validators/post');
 const authenticate = require('../middlewares/authenticate')
 
@@ -12,6 +12,8 @@ module.exports = (upload) => {
   router.get('/:id', authenticate, getPostsForUser)
 
   router.patch('/:id', authenticate, postUpdateValidator, updatePost)
+
+  router.delete('/:id', authenticate, deletePost)
 
   router.post('/create', authenticate, upload.single('image'), postValidator, createPost)
 

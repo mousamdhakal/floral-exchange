@@ -99,6 +99,31 @@ function postReducers(state = INITIAL_STATE, action) {
         error: action.payload.error,
         isCalling: false,
       }
+
+    case postActions.DELETE_POST_REQUEST:
+      return {
+        ...state,
+        error: null,
+        isCalling: true,
+      }
+
+    case postActions.DELETE_POST_SUCCESS:
+      let newUserPosts = state.userPosts.filter(post => post._id !== action.payload)
+      // console.log(action.payload)
+      return {
+        ...state,
+        error: null,
+        isCalling: false,
+        userPosts: newUserPosts,
+      }
+
+    case postActions.DELETE_POST_FAILURE:
+      return {
+        ...state,
+        error: action.payload.error,
+        isCalling: false,
+      }
+
     default:
       return state
   }

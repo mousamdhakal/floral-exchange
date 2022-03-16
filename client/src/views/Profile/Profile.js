@@ -9,6 +9,8 @@ import { ToggleButton } from '@mui/material'
 import Modal from '../../components/Modal/Modal'
 import Dropdown from '../../components/Dropdown/Dropdown'
 import FormInput from '../../components/Input/FormInput'
+import MoonLoader from "react-spinners/MoonLoader";
+import { css } from "@emotion/react";
 
 import './profile.scss'
 import * as uiActions from '../../actions/uiActions'
@@ -17,6 +19,12 @@ import * as userActions from '../../actions/userActions'
 
 import ItemCard from '../../components/itemCards/ItemCard'
 import ToggleButtons from '../../components/ToggleButtons/ToggleButtons'
+
+const override = css`
+display: block;
+margin: 0 auto;
+border-color: red;
+`;
 
 export class Profile extends Component {
   constructor(props) {
@@ -231,19 +239,31 @@ export class Profile extends Component {
 
         {this.state.buttonState === 'posts' ? (
           <div className="profile-item">
-            {this.props.posts &&
-              this.props.posts.map((item) => (
-                <ItemCard
-                  key={item._id}
-                  type={item.type}
-                  title={item.title}
-                  description={item.description}
-                  image={item.image}
-                  date={item.date}
-                  self={true}
-                  deleteThis={() => console.log('deleted')}
-                />
-              ))}
+            {
+              this.props.loading ? (
+                <div className="loading-icon">
+                  <MoonLoader color={'green'} loading={this.props.loading} css={override} size={80} />
+                </div>
+              ) : (
+                <>
+                  {this.props.posts &&
+                    this.props.posts.map((item) => (
+                      <ItemCard
+                        key={item._id}
+                        type={item.type}
+                        title={item.title}
+                        description={item.description}
+                        image={item.image}
+                        date={item.date}
+                        self={true}
+                        deleteThis={() => {
+                          this.props.deletePost(item._id)
+                        }}
+                      />
+                    ))}
+                </>
+              )
+            }
           </div>
         ) : (
           <div style={{'textAlign': 'center'}}><span> These are no liked posts </span></div>
@@ -254,7 +274,7 @@ export class Profile extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.user.user, posts: state.post.userPosts }
+  return { user: state.user.user, posts: state.post.userPosts, loading: state.post.isCalling }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -263,7 +283,7 @@ const mapDispatchToProps = (dispatch) => {
     getUserPosts: (id) => dispatch(postActions.getUserPosts(id)),
     getUser: (id) => dispatch(userActions.getUser(id)),
     updateUser: (user) => dispatch(userActions.updateUser(user)),
-    // deletePost: (id) => dispatch(postActions.deletePost(id)),
+    deletePost: (id) => dispatch(postActions.deletePost(id)),
   }
 }
 

@@ -15,11 +15,9 @@ const FormInput = ({
 }) => {
   return (
     <div className={containerClass ? containerClass : 'input-root'}>
-      {label && label != false ?
-        <InputLabel classes={{ root: 'form-input-label' }} htmlFor={id}>
-          {name}
-        </InputLabel> : null
-      }
+      <InputLabel classes={{ root: 'form-input-label' }} htmlFor={id}>
+        {name}
+      </InputLabel>
       <InputBase
         classes={{ input: 'form-input', root: 'input-root' }}
         onChange={handleChange}

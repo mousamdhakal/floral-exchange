@@ -86,9 +86,10 @@ export const contactUserFailure = (error) => ({
   payload: error
 });
 
-export const getContact = (userId) => ({
+export const getContact = (userId, waitForUpdate) => ({
   type: GET_CONTACT_REQUEST,
   payload: userId,
+  postUpdate: waitForUpdate
 })
 
 export const getContactSuccess = (contact) => ({

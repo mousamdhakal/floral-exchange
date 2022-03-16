@@ -21,6 +21,7 @@ const updatePostSchema = Joi.object({
   title: Joi.string().max(500),
   date: Joi.string().max(500),
   location: Joi.object({ latitude: Joi.number().required(), longitude: Joi.number().required() }),
+  exchanged: Joi.boolean(),
 })
 
 /**

@@ -94,11 +94,6 @@ function chatReducers(state = INITIAL_STATE, action) {
     case chatActions.SET_NEW_MESSAGE:
       let details = [...state.chatDetails]
       let chats = [...state.chats]
-      console.log(
-        state.user._id,
-        action.payload.message.sender_id,
-        action.payload.message.receiver_id
-      )
       if (
         state.user &&
         (state.user._id === action.payload.message.sender_id ||
@@ -125,11 +120,13 @@ function chatReducers(state = INITIAL_STATE, action) {
         }
       }
 
+
+
       return {
         ...state,
         error: null,
         isCalling: false,
-        chatDetails: details,
+        chatDetails: details.filter((v,i,a)=>a.findIndex(t=>(t._id===v._id))===i),
         chats: chats,
       }
 

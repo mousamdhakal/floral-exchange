@@ -6,6 +6,7 @@ import {
   getContactWithUser
 } from '../services/http'
 import * as chatActions from '../actions/chatActions'
+import * as postActions from '../actions/postActions'
 import { toast } from 'react-toastify'
 
 function* getChats(action) {
@@ -53,6 +54,9 @@ function* contactUser(action) {
 
 function* getContact(action) {
   try {
+    if(action.postUpdate) {
+      yield take(postActions.UPDATE_POST_SUCCESS)
+    }
     const response = yield call(getContactWithUser, action.payload)
     yield put({
       type: chatActions.GET_CONTACT_SUCCESS,

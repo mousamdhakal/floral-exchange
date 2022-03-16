@@ -246,7 +246,7 @@ export class Profile extends Component {
               ))}
           </div>
         ) : (
-          <div> These are the liked post </div>
+          <div style={{'textAlign': 'center'}}><span> These are no liked posts </span></div>
         )}
       </div>
     )

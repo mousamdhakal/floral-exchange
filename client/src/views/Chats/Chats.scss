@@ -6,7 +6,7 @@
 .chats-list {
   flex: 30%;
   min-width: 300px;
-  border: 1px solid var(--grey-1)
+  border: 1px solid var(--grey-1);
 }
 
 .chat-details {
@@ -60,7 +60,7 @@
 
 .chat-list-item-header-left-info-last-message {
   font-size: 12px;
-  color: var(--muted)
+  color: var(--muted);
   // color: var(--grey-2);
 }
 
@@ -72,7 +72,7 @@
 
 .chat-list-item-header-right-time {
   font-size: 12px;
-  color: var(--muted)
+  color: var(--muted);
   // color: var(--grey-2);
 }
 
@@ -114,9 +114,9 @@
   align-items: center;
   justify-content: flex-end;
   padding: 5px;
-  
+
   .generic-message {
-    background-color: var(--purple);
+    background-color: var(--dark-green);
     color: var(--light-grey);
     min-height: 24px;
   }
@@ -142,9 +142,42 @@
     border-top: 1px solid var(--grey-1);
   }
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     fieldset {
       border-top: 1px solid var(--mid-grey) !important;
     }
+  }
+}
+
+.exchange-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+
+  button {
+    background-color: var(--white);
+    color: var(--purple);
+  }
+}
+
+.exchange-action-button {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  padding-bottom: 20px;
+
+  button {
+    background-color: var(--purple);
+    color: var(--white);
+    border: none;
+    border-radius: 20px;
+    padding: 5px 20px
+  }
+}
+
+.exchange-action-button.completed {
+  button {
+    background-color: var(--dark-red)
   }
 }

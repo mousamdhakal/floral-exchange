@@ -44,6 +44,7 @@ function getUserPosts(id) {
  */
 function createNewPost(post, imageName) {
   const modifiedPost = JSON.parse(JSON.stringify(post))
+  modifiedPost.exchanged = false;
   if(imageName) {
     modifiedPost.image  = imageName
   }

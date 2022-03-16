@@ -45,7 +45,7 @@ function* getPostsForUser(action) {
 
 function* updatePostSaga(action) {
   try {
-    const response = yield call(updatePost, action.payload);
+    const response = yield call(updatePost, action.id,action.payload);
     yield put({ type: postActions.UPDATE_POST_SUCCESS, payload: response.data });
   } catch (error) {
     yield put({ type: postActions.UPDATE_POST_FAILURE, payload: error });

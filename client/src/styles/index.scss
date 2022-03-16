@@ -150,7 +150,41 @@ body {
   width: auto;
 }
 
-.post-image {
+.post-image, .contact-post-image {
   height: 100%;
   display: inline;
+}
+
+.chat-last-contact {
+  height: 200px;
+  display: flex;
+  background-color: var(--light-green);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-bottom: 20px;
+  overflow: auto;
+  max-height: 30%;
+
+  img {
+    flex: 1;
+    height: 100%;
+    margin-left: 15px;
+    padding: 15px 0;
+    filter: drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.4));
+  }
+}
+
+.contact-post-details {
+  margin: 20px;
+  flex: 1;
+
+  p {
+    color: var(--white)
+  }
+}
+
+.chat-contact-info {
+  background-color: var(--light-green);
+  color: var(--white);
+  padding: 10px 0 0 15px;
 }

@@ -10,8 +10,11 @@ const { getAllPosts, createNewPost, getUserPosts, updatePostWithId, deletePostWi
  * @param {Function} next Function as a reference to call next middleware
  */
 const getPosts = async (req, res, next) => {
+  console.log(req.user)
+  const userId = req.user._id
+  // For demonstration purpose to show loading sign
   setTimeout(() =>
-    getAllPosts()
+    getAllPosts(userId)
       .then((posts) => {
         res.status(200).json({
           posts: posts,

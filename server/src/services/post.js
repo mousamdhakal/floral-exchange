@@ -2,6 +2,9 @@ const Boom = require('@hapi/boom');
 
 const Post = require('../models/Post');
 
+const mongoose = require('mongoose')
+
+
 
 /**
  * Get a post from id.
@@ -19,8 +22,9 @@ function getPost(id) {
  * @param   
  * @returns {Promise}
  */
-function getAllPosts() {
-  return Post.find().exec()
+function getAllPosts(userId) {
+  // const id1 = mongoose.Types.ObjectId(userId)
+  return Post.find({exchanged: false, user_id: { $ne: userId}}).exec()
 }
 
 /**

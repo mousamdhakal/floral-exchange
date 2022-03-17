@@ -21,6 +21,7 @@ function* getChats(action) {
 
 function* getChatDetails(action) {
   try {
+    console.log(action.payload)
     if (action.payload.contact) {
       yield take(chatActions.CONTACT_USER_SUCCESS)
     }
@@ -39,6 +40,7 @@ function* getChatDetails(action) {
 
 function* contactUser(action) {
   try {
+    console.log(action.payload)
     const response = yield call(contactUserForPost, action.payload._id)
     yield put({
       type: chatActions.CONTACT_USER_SUCCESS,

@@ -13,7 +13,6 @@ const ChatDetails = ({ handleSendMessage }) => {
   const [message, setMessage] = useState('')
   const user = useSelector((state) => state.user.user)
   const lastContact = useSelector((state) => state.chat.contact)
-  console.log('>>>>>>>>>>>>>>>>', lastContact)
 
   const chatDetails = useSelector((state) => state.chat.chatDetails).sort(
     (a, b) => a.date - b.date

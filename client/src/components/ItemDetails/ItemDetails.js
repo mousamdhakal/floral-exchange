@@ -112,7 +112,7 @@ const ItemDetails = ({ props, onClose }) => {
               containedButton={
                 'contained-full-button quarter-width m-24 contact-button'
               }
-            // handleClick={this.savePost}
+            handleClick={contactOwner}
             >
               Contact owner
               <SendIcon className="contact-owner-icon" />

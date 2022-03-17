@@ -25,3 +25,18 @@ export function timeSince(date) {
   }
   return Math.floor(seconds) + " sec ago";
 }
+
+export function filterPosts(posts, filter) {
+  if (filter === 'all') {
+    return posts
+  }
+  else {
+    let filteredPost = [];
+    for (let i = 0; i < posts.length; i++) {
+      if (posts[i].type === filter) {
+        filteredPost.push(posts[i]);
+      }
+    }
+    return filteredPost;
+  }
+}

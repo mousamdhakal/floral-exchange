@@ -16,6 +16,7 @@ import * as chatActions from '../../actions/chatActions'
 import './ItemDetails.scss'
 import { IMAGE_ENDPOINT } from '../../utils/constants'
 import { useHistory } from 'react-router-dom'
+import { timeSince } from '../../utils/utils'
 
 const ItemDetails = ({ props, onClose }) => {
   const [edit, setEdit] = useState(false)
@@ -37,12 +38,12 @@ const ItemDetails = ({ props, onClose }) => {
     setAnchorE1(null)
     closedMenu = true
   }
-  
+
   const handleEdit = () => {
     setAnchorE1(null)
     setEdit(true)
   }
-  
+
   const handleDelete = () => {
     console.log('delete')
     setAnchorE1(null)
@@ -60,7 +61,7 @@ const ItemDetails = ({ props, onClose }) => {
       <div className="post-content">
         <div className="post-text">
           <Typography className="post-title">{props.title}</Typography>
-          <Typography className="post-date">Posted on: {props.date}</Typography>
+          <Typography className="post-date">Posted {timeSince(new Date(props.date))}</Typography>
           <Typography className="post-desc">{props.description}</Typography>
         </div>
 
@@ -112,7 +113,7 @@ const ItemDetails = ({ props, onClose }) => {
               containedButton={
                 'contained-full-button quarter-width m-24 contact-button'
               }
-            handleClick={contactOwner}
+              handleClick={contactOwner}
             >
               Contact owner
               <SendIcon className="contact-owner-icon" />

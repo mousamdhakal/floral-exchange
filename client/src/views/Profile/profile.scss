@@ -102,6 +102,9 @@
   color: var(--dark-green);
   // border-bottom: 1px solid var(--primary-green);
   box-shadow: 0px 4px 0px rgba(19, 117, 71, 0.5);
+  background-color: var(--grey-1);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 
 .edit-profile-container {

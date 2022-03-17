@@ -11,7 +11,7 @@ module.exports = (upload) => {
 
   router.get('/:id', authenticate, getPostsForUser)
 
-  router.patch('/', authenticate, postUpdateValidator, updatePost)
+  router.patch('/:id', authenticate, postUpdateValidator, updatePost)
 
   router.delete('/:id', authenticate, deletePost)
 

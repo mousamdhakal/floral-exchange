@@ -10,7 +10,7 @@ const Post = require('../models/Post');
  * @returns {Promise}
  */
 function getPost(id) {
-  return Post.findOne({ _id }).exec()
+  return Post.findOne({ _id: id }).exec()
 }
 
 /**
@@ -44,8 +44,9 @@ function getUserPosts(id) {
  */
 function createNewPost(post, imageName) {
   const modifiedPost = JSON.parse(JSON.stringify(post))
-  if (imageName) {
-    modifiedPost.image = imageName
+  modifiedPost.exchanged = false;
+  if(imageName) {
+    modifiedPost.image  = imageName
   }
 
   const newPost = new Post(modifiedPost)

@@ -93,7 +93,7 @@ const createPost = async (req, res, next) => {
  */
 const updatePost = async (req, res, next) => {
 
-  const postId = req.post._id
+  const postId = req.params.id
   updatePostWithId(postId, req.body)
     .then(post => {
       res.status(200).json({

@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   chats: [],
   user: null,
   chatDetails: [],
+  contact: null
 }
 
 function chatReducers(state = INITIAL_STATE, action) {
@@ -93,7 +94,6 @@ function chatReducers(state = INITIAL_STATE, action) {
     case chatActions.SET_NEW_MESSAGE:
       let details = [...state.chatDetails]
       let chats = [...state.chats]
-      console.log(state.user._id,action.payload.message.sender_id,action.payload.message.receiver_id)
       if (
         state.user &&
         (state.user._id === action.payload.message.sender_id ||
@@ -120,13 +120,61 @@ function chatReducers(state = INITIAL_STATE, action) {
         }
       }
 
+
+
       return {
         ...state,
         error: null,
         isCalling: false,
-        chatDetails: details,
+        chatDetails: details.filter((v,i,a)=>a.findIndex(t=>(t._id===v._id))===i),
         chats: chats,
       }
+
+    case chatActions.CONTACT_USER_REQUEST:
+      return {
+        ...state,
+        error: null,
+        isCalling: true,
+      }
+
+    case chatActions.CONTACT_USER_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        isCalling: false,
+      }
+
+    case chatActions.CONTACT_USER_FAILURE:
+      return {
+        ...state,
+        error: action.payload.error,
+        isCalling: false,
+      }
+
+      case chatActions.GET_CONTACT_REQUEST:
+        return {
+          ...state,
+          error: null,
+          isCalling: true,
+          contact: null
+        }
+  
+      case chatActions.GET_CONTACT_SUCCESS:
+        return {
+          ...state,
+          error: null,
+          isCalling: false,
+          contact: action.payload
+        }
+  
+      case chatActions.GET_CONTACT_FAILURE:
+        return {
+          ...state,
+          error: action.payload.error,
+          isCalling: false,
+          contact: null
+        }
+
     default:
       return state
   }

@@ -81,8 +81,24 @@ export const updateUser = (user) => {
   })
 }
 
-export const updatePost = (post) => {
-  return axios.patch(`${BASE_URL}/post`, post, {
+export const updatePost = (id,post) => {
+  return axios.patch(`${BASE_URL}/post/${id}`, post, {
+    header: {
+      'content-type': 'application.json',
+    },
+  })
+}
+
+export const contactUserForPost = (postId) => {
+  return axios.post(`${BASE_URL}/contact/${postId}`,null, {
+    header: {
+      'content-type': 'application.json',
+    },
+  })
+}
+
+export const getContactWithUser = (userId) => {
+  return axios.get(`${BASE_URL}/contact/${userId}`, {
     header: {
       'content-type': 'application.json',
     },

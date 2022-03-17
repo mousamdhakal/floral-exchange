@@ -10,6 +10,14 @@ export const SEND_CHAT_REQUEST = 'SEND_CHAT_REQUEST';
 export const SEND_CHAT_SUCCESS = 'SEND_CHAT_SUCCESS';
 export const SEND_CHAT_FAILURE = 'SEND_CHAT_FAILURE';
 
+export const CONTACT_USER_REQUEST = 'CONTACT_USER_REQUEST';
+export const CONTACT_USER_SUCCESS = 'CONTACT_USER_SUCCESS';
+export const CONTACT_USER_FAILURE = 'CONTACT_USER_FAILURE';
+
+export const GET_CONTACT_REQUEST = 'GET_CONTACT_REQUEST';
+export const GET_CONTACT_SUCCESS = 'GET_CONTACT_SUCCESS';
+export const GET_CONTACT_FAILURE = 'GET_CONTACT_FAILURE';
+
 export const SET_NEW_MESSAGE = 'SET_NEW_MESSAGE';
 
 export const getChats = () => ({
@@ -60,5 +68,37 @@ export const sendChatFailure = (error) => ({
 export const setNewMessage = (message,senderUser) => ({
   type: SET_NEW_MESSAGE,
   payload: {message: message, senderUser: senderUser}
+});
+
+export const contactUser = (post, history) => ({
+  type: CONTACT_USER_REQUEST,
+  payload: post,
+  history: history
+})
+
+export const contactUserSuccess = (chat) => ({
+  type: CONTACT_USER_SUCCESS,
+  payload: chat
+});
+
+export const contactUserFailure = (error) => ({
+  type: CONTACT_USER_FAILURE,
+  payload: error
+});
+
+export const getContact = (userId, waitForUpdate) => ({
+  type: GET_CONTACT_REQUEST,
+  payload: userId,
+  postUpdate: waitForUpdate
+})
+
+export const getContactSuccess = (contact) => ({
+  type: GET_CONTACT_SUCCESS,
+  payload: contact
+});
+
+export const getContactFailure = (error) => ({
+  type: GET_CONTACT_FAILURE,
+  payload: error
 });
 

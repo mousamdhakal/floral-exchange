@@ -64,9 +64,10 @@ export const getUserPostsFailure = (error) => ({
   payload: error
 });
 
-export const updatePost = (postData) => ({
+export const updatePost = (id,postData) => ({
   type: UPDATE_POST_REQUEST,
-  payload: postData
+  payload: postData,
+  id: id
 })
 
 export const updatePostSuccess = (post) => ({

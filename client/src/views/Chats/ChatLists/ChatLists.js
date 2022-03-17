@@ -2,15 +2,17 @@ import SearchOutlined from '@mui/icons-material/SearchOutlined'
 import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 import { timeSince } from '../../../utils/utils'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as chatActions from '../../../actions/chatActions'
 
 
 const ChatLists = ({chats}) => {
   const dispatch = useDispatch()
+  const selectedUser = useSelector((state) => state.chat.user)
 
   const fetchMessages = (user) => {
     dispatch(chatActions.getChatDetails(user))
+    dispatch(chatActions.getContact(user._id))
   }
   
   return (
@@ -35,7 +37,7 @@ const ChatLists = ({chats}) => {
       {chats &&
         chats.length > 0 &&
         chats.map((chat) => (
-          <div className="chat-list-item" key={chat._id} onClick={() => fetchMessages(chat.user[0])}>
+          <div className={`chat-list-item ${selectedUser && selectedUser._id === chat.user[0]._id ? 'chat-list-item-selected' : '' }`} key={chat._id} onClick={() => fetchMessages(chat.user[0])}>
             <div className="chat-list-item-header">
               <div className="chat-list-item-header-left">
                 <div className="chat-list-item-header-left-avatar">

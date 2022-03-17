@@ -12,6 +12,7 @@ const postSchema = mongoose.Schema({
   image: String,
   user_id: mongoose.SchemaTypes.ObjectId,
   date: Date,
+  exchanged: Boolean,
   location: Object
 });
 

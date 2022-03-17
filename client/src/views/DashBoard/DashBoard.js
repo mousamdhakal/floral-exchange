@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import MoonLoader from "react-spinners/MoonLoader";
 import { css } from "@emotion/react";
-import { filterPosts } from "../../utils/utils";
+import { filterPosts, sequentialSearch, sortPosts } from "../../utils/utils";
 
 import './DashBoard.scss'
 import * as uiActions from '../../actions/uiActions'
@@ -31,6 +31,7 @@ export class DashBoard extends Component {
       currentType: 'all',
       currentSort: '',
       filteredPosts: [],
+      searchText: ''
     }
   }
 
@@ -40,17 +41,30 @@ export class DashBoard extends Component {
   }
 
   handleDropdownChange = (e) => {
-    this.setState({ currentType: e.target.value }, () => {
-      const newPosts = filterPosts(this.props.posts, this.state.currentType)
-      console.log('new posts:', newPosts)
-      this.setState({ filteredPosts: newPosts })
-    })
+    this.setState({ currentType: e.target.value }, this.runConstraints)
+  }
+
+  handleSort = (e) => {
+    this.setState({ currentSort: e.target.value }, this.runConstraints)
+  }
+
+  handleSearch = (e) => {
+    let filteredPosts = sequentialSearch(this.props.posts,['title','description'],e.target.value)
+    this.setState({ filteredPosts, currentSort: '', currentType: 'all', searchText: e.target.value })
+  }
+
+  runConstraints = () => {
+    let newPosts = filterPosts(this.props.posts, this.state.currentType)
+    if(this.state.currentSort) {
+      newPosts = sortPosts(newPosts, this.state.currentSort);
+    }
+    this.setState({ filteredPosts: newPosts })
   }
 
   render() {
-    let { currentType, currentSort, filteredPosts } = this.state
+    let { currentType, currentSort, filteredPosts, searchText } = this.state
 
-    filteredPosts = filteredPosts && filteredPosts.length > 0 ? filteredPosts : this.props.posts ? this.props.posts : []
+    filteredPosts = filteredPosts && filteredPosts.length > 0  ? filteredPosts : this.props.posts && !searchText ? this.props.posts : []
 
     return (
       <div className='dashboard-container'>
@@ -67,6 +81,7 @@ export class DashBoard extends Component {
                     fullWidth
                     variant="outlined"
                     placeholder="Search"
+                    onChange={this.handleSearch}
                     InputProps={{
                       classes: {
                         root: 'searchBar',
@@ -87,7 +102,7 @@ export class DashBoard extends Component {
                       { name: 'Title', value: 'title' },
                     ]}
                     containerClass="dropdown-filter"
-                    setDropdownValue={(e) => this.setState({ currentSort: e.target.value })}
+                    setDropdownValue={this.handleSort}
                     value={currentSort}
                   />
                 </div>
